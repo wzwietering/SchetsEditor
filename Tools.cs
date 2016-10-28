@@ -92,7 +92,7 @@ namespace SchetsEditor
         public override void MuisDrag(SchetsControl s, Point p)
         {
             s.Refresh();
-            this.Bezig(s.CreateGraphics(), this.startpunt, p, s);
+            this.Bezig(s.CreateGraphics(), this.startpunt, p, s.lijnDikte);
         }
         public override void MuisLos(SchetsControl s, Point p)
         {   base.MuisLos(s, p);
@@ -103,11 +103,11 @@ namespace SchetsEditor
         public override void Letter(SchetsControl s, char c)
         {
         }
-        public abstract void Bezig(Graphics g, Point p1, Point p2, SchetsControl s);
+        public abstract void Bezig(Graphics g, Point p1, Point p2, int d);
 
         public virtual void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {
-            this.Bezig(g, p1, p2, s);
+            this.Bezig(g, p1, p2, s.lijnDikte);
         }
     }
 
@@ -115,9 +115,9 @@ namespace SchetsEditor
     {
         public override string ToString() { return "kader"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2, SchetsControl s)
+        public override void Bezig(Graphics g, Point p1, Point p2, int d)
         {
-            g.DrawRectangle(MaakPen(kwast, s.lijnDikte), TweepuntTool.Punten2Rechthoek(p1, p2));
+            g.DrawRectangle(MaakPen(kwast, d), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
     }
 
@@ -135,9 +135,9 @@ namespace SchetsEditor
     {
         public override string ToString() { return "cirkel"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2, SchetsControl s)
+        public override void Bezig(Graphics g, Point p1, Point p2, int d)
         {
-            g.DrawEllipse(MaakPen(kwast, s.lijnDikte), TweepuntTool.Punten2Rechthoek(p1, p2));
+            g.DrawEllipse(MaakPen(kwast, d), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
     }
 
@@ -155,9 +155,9 @@ namespace SchetsEditor
     {
         public override string ToString() { return "lijn"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2, SchetsControl s)
+        public override void Bezig(Graphics g, Point p1, Point p2, int d)
         {
-            g.DrawLine(MaakPen(this.kwast, s.lijnDikte), p1, p2);
+            g.DrawLine(MaakPen(this.kwast, d), p1, p2);
         }
     }
 
@@ -176,9 +176,9 @@ namespace SchetsEditor
     {
         public override string ToString() { return "gum"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2, SchetsControl s)
+        public override void Bezig(Graphics g, Point p1, Point p2, int d)
         {
-            g.DrawLine(MaakPen(Brushes.White, s.lijnDikte), p1, p2);
+            g.DrawLine(MaakPen(Brushes.White, d), p1, p2);
         }
     }
 }
