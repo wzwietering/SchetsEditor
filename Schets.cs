@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace SchetsEditor
 {
     public class Schets
     {
+        private List<Element> elements = new List<Element>();
         private Bitmap bitmap;
         
         public Schets()
@@ -41,6 +43,28 @@ namespace SchetsEditor
         public void Roteer()
         {
             bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
+        }
+
+        public void Opslaan()
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "Save Image";
+            sfd.Filter = "PNG|*.png|JPEG|*.jpg|Bitmap Image|*.bmp|GIF|*.gif|";
+            sfd.FileName = "New image";
+            sfd.ShowDialog();
+
+            try
+            {
+                System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile();
+                bitmap.Save(fs, System.Drawing.Imaging.ImageFormat.Png);
+            }
+            //When there is no image, this error is thrown
+            catch (NullReferenceException nre)
+            {
+                MessageBox.Show("No image available\n" + nre);
+            }
+            //This error is thrown when the user cancels the save
+            catch (IndexOutOfRangeException i) { }
         }
     }
 }

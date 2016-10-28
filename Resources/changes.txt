@@ -1,2 +1,4 @@
 ﻿1. CirkelTool en VolCirkelTool klassen toegevoegd aan tools.cs
 2. Recourses voor cirkel en volcirkel toegevoegd
+3. Element class toegevoegd in nieuwe file
+4. Initialisatie van lijst met Elementen toegevoegd aan Schets class
