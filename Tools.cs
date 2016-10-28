@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Linq;
 
 namespace SchetsEditor
 {
@@ -58,13 +59,14 @@ namespace SchetsEditor
                 gr.MeasureString(tekst, font, this.startpunt, StringFormat.GenericTypographic);
                 gr.DrawString(tekst, font, kwast,
                                               this.startpunt, StringFormat.GenericTypographic);
-                // gr.DrawRectangle(Pens.Black, startpunt.X, startpunt.Y, sz.Width, sz.Height);
-                startpunt.X += (int)sz.Width;
-                s.Invalidate();
 
-                Element element = base.CreateElement(s, new Point(0, 0));
+                Element element = base.CreateElement(s, new Point(startpunt.X + (int)sz.Width, startpunt.Y + (int)sz.Height));
                 element.Text = c;
                 s.Schets.AddElement(element);
+
+                // gr.DrawRectangle(Pens.Black, startpunt.X, startpunt.Y, sz.Width, sz.Height);
+                startpunt.X += (int)sz.Width;
+                s.Invalidate();                
             }
         }
     }
@@ -172,13 +174,25 @@ namespace SchetsEditor
         }
     }
 
-    public class GumTool : PenTool
+    public class GumTool : StartpuntTool
     {
         public override string ToString() { return "gum"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2, int d)
+        public override void MuisDrag(SchetsControl s, Point p) { }
+        public override void Letter(SchetsControl s, char c) { }
+
+        public override void MuisLos(SchetsControl s, Point p)
         {
-            g.DrawLine(MaakPen(Brushes.White, d), p1, p2);
+            var clickedElements = s.Schets.GetElements().Where(e => e.pointA.X <= p.X 
+                                            && e.pointA.Y <= p.Y
+                                            && e.pointB.X >= p.X 
+                                            && e.pointB.Y >= p.Y);
+            if (clickedElements != null && clickedElements.Count() > 0)
+            {
+                var clickedElement = clickedElements.Last();
+                s.Schets.RemoveElement(clickedElement);
+                s.RebuildBitmap(this, new EventArgs());
+            }
         }
     }
 }

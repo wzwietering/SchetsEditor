@@ -76,6 +76,9 @@ namespace SchetsEditor
 
         public void RebuildBitmap(object sender, EventArgs e)
         {
+            this.Schets.Schoon();
+            this.Invalidate();
+
             var elements = new List<Element>();
             elements.AddRange(schets.GetElements());
             schets.ResetAllElements();

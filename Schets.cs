@@ -37,7 +37,7 @@ namespace SchetsEditor
         }
         public void Schoon()
         {
-            Graphics gr = Graphics.FromImage(bitmap);
+            Graphics gr = BitmapGraphics;
             gr.FillRectangle(Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
         }
         public void Roteer()
@@ -83,6 +83,11 @@ namespace SchetsEditor
         internal List<Element> GetElements()
         {
             return this.elements;
+        }
+
+        internal void RemoveElement(Element clickedElement)
+        {
+            this.elements.Remove(clickedElement);
         }
     }
 }
