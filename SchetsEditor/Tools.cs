@@ -17,7 +17,6 @@ namespace SchetsEditor
     {
         protected Point startpunt;
         protected Brush kwast;
-        protected int brushSize;
 
         public virtual void MuisVast(SchetsControl s, Point p)
         {

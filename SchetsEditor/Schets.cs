@@ -9,7 +9,7 @@ namespace SchetsEditor
     {
         private List<Element> elements = new List<Element>();
         private Bitmap bitmap;
-        
+
         public Schets()
         {
             bitmap = new Bitmap(1, 1);
@@ -20,16 +20,11 @@ namespace SchetsEditor
         }
         public void VeranderAfmeting(Size sz)
         {
-            if (sz.Width > bitmap.Size.Width || sz.Height > bitmap.Size.Height)
-            {
-                Bitmap nieuw = new Bitmap( Math.Max(sz.Width,  bitmap.Size.Width)
-                                         , Math.Max(sz.Height, bitmap.Size.Height)
-                                         );
-                Graphics gr = Graphics.FromImage(nieuw);
-                gr.FillRectangle(Brushes.White, 0, 0, sz.Width, sz.Height);
-                gr.DrawImage(bitmap, 0, 0);
-                bitmap = nieuw;
-            }
+            Bitmap nieuw = new Bitmap(sz.Width, sz.Height);
+            Graphics gr = Graphics.FromImage(nieuw);
+            gr.FillRectangle(Brushes.White, 0, 0, sz.Width, sz.Height);
+            gr.DrawImage(bitmap, 0, 0);
+            bitmap = nieuw;
         }
         public void Teken(Graphics gr)
         {
