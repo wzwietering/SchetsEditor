@@ -9,7 +9,7 @@ namespace SchetsEditor
     public class SchetsControl : UserControl
     {
         private Schets schets;
-        private Color penkleur;
+        private Color penkleur = Color.Black;
 
         public Color PenKleur
         {

@@ -148,7 +148,7 @@ namespace SchetsEditor
         private void maakAktieButtons()
         {
             paneel = new Panel();
-            paneel.Size = new Size(600, 24);
+            paneel.Size = new Size(600, 30);
             this.Controls.Add(paneel);
 
             Button b;
@@ -184,6 +184,7 @@ namespace SchetsEditor
             t.SmallChange = 1;
             t.Location = new Point(300, 0);
             t.Size = new Size(80, 20);
+            t.TickStyle = TickStyle.BottomRight;
             t.ValueChanged += schetscontrol.VeranderBrush;
             paneel.Controls.Add(t);
 
