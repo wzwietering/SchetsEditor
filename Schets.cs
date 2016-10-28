@@ -66,5 +66,23 @@ namespace SchetsEditor
             //This error is thrown when the user cancels the save
             catch (IndexOutOfRangeException i) { }
         }
+
+        internal void AddElement(Element element)
+        {
+            if (element.toolType != typeof(GumTool))
+            {
+                this.elements.Add(element);
+            }
+        }
+
+        internal void ResetAllElements()
+        {
+            this.elements.Clear();
+        }
+
+        internal List<Element> GetElements()
+        {
+            return this.elements;
+        }
     }
 }
