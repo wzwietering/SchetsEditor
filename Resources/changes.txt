@@ -6,3 +6,4 @@
 6. Schets heeft een 'Opslaan' methode gekregen om een file op te slaan
 7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
 8. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.
+9. Variable lijndikte
