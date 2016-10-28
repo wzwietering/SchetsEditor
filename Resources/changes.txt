@@ -6,6 +6,12 @@ Het nieuwe gummen:
 3. Element class toegevoegd in nieuwe file
 4. Initialisatie van lijst met Elementen toegevoegd aan Schets class
 5. Hoofdscherm heeft een 'Opslaan' knop gekregen in het menu
+6. Schets heeft een AddElement, ResetAllElements en GetElements zodat elementen kunnen worden toegevoegd/opgehaald.
+7. Schetscontrol heeft een RebuildBitmap die voor elk element in de schets de Redraw method aanroept die het element opnieuw tekent.
+
+Opslaan:
 6. Schets heeft een 'Opslaan' methode gekregen om een file op te slaan
+
+Colorpicker:
 7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
 8. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.

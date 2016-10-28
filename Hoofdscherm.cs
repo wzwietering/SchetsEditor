@@ -48,7 +48,7 @@ namespace SchetsEditor
 
         private void Opslaan(object sender, EventArgs e)
         {
-            #warning Not implemented, Schets heeft een methode die hier geïmplementeerd moet worden
+            throw new NotImplementedException();
         }
 
         private void afsluiten(object sender, EventArgs e)

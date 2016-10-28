@@ -69,7 +69,20 @@ namespace SchetsEditor
 
         internal void AddElement(Element element)
         {
-            this.elements.Add(element);
+            if (element.toolType != typeof(GumTool))
+            {
+                this.elements.Add(element);
+            }
+        }
+
+        internal void ResetAllElements()
+        {
+            this.elements.Clear();
+        }
+
+        internal List<Element> GetElements()
+        {
+            return this.elements;
         }
     }
 }

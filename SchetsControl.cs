@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -67,6 +68,31 @@ namespace SchetsEditor
             if(resultaat == DialogResult.OK)
             {
                 penkleur = kleurDialoog.Color;
+            }
+        }
+
+        public void RebuildBitmap(object sender, EventArgs e)
+        {
+            var elements = new List<Element>();
+            elements.AddRange(schets.GetElements());
+            schets.ResetAllElements();
+
+            var color = this.penkleur;
+            foreach (Element element in elements)
+            {
+                this.penkleur = element.color;
+                Redraw(element);
+            }
+        }
+
+        private void Redraw(Element element)
+        {
+            var tool = (ISchetsTool)Activator.CreateInstance(element.toolType);
+            tool.MuisVast(this, element.pointA);
+            tool.MuisLos(this, element.pointB);
+            if(tool.GetType() == typeof(TekstTool))
+            {
+                tool.Letter(this, element.Text);
             }
         }
     }

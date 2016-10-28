@@ -13,6 +13,6 @@ namespace SchetsEditor
 
         public Color color;
 
-        public string Text;
+        public char Text;
     }
 }

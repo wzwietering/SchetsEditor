@@ -169,6 +169,12 @@ namespace SchetsEditor
             b.Location = new Point(160, 0);
             b.Click += schetscontrol.VeranderKleurViaMenu;
             paneel.Controls.Add(b);
+
+            b = new Button();
+            b.Text = "REDRAW";
+            b.Location = new Point(280, 0);
+            b.Click += schetscontrol.RebuildBitmap;
+            paneel.Controls.Add(b);
         }
     }
 }

@@ -60,7 +60,7 @@ namespace SchetsEditor
                 s.Invalidate();
 
                 Element element = base.CreateElement(s, new Point(0, 0));
-                element.Text = tekst;
+                element.Text = c;
                 s.Schets.AddElement(element);
             }
         }
