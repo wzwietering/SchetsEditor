@@ -171,8 +171,9 @@ namespace SchetsEditor
             paneel.Controls.Add(b);
 
             Label l = new Label();
-            l.Text = "Line thickness:";
+            l.Text = "Lijn dikte:";
             l.Location = new Point(240, 5);
+            l.Size = new Size(60, 20);
             paneel.Controls.Add(l);
 
             TrackBar t = new TrackBar();
@@ -181,14 +182,14 @@ namespace SchetsEditor
             t.TickFrequency = 3;
             t.LargeChange = 3;
             t.SmallChange = 1;
-            t.Location = new Point(340, 0);
+            t.Location = new Point(300, 0);
             t.Size = new Size(80, 20);
             t.ValueChanged += schetscontrol.VeranderBrush;
             paneel.Controls.Add(t);
 
             b = new Button();
-            b.Text = "Redraw";
-            b.Location = new Point(420, 0);
+            b.Text = "Herteken";
+            b.Location = new Point(380, 0);
             b.Click += schetscontrol.RebuildBitmap;
             paneel.Controls.Add(b);
         }
