@@ -22,3 +22,6 @@ Colorpicker:
 Lijndikte:
 10.	Lijn hebben een instelbare dikte
 11. In de userinterface is er een slider en een label om dit aan te geven.
+
+Bitmap resize:
+12. Bitmap wordt opnieuw gemaakt als het window geresized wordt, zodat hij de afmetingen van het window heeft.
