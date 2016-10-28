@@ -1,0 +1,7 @@
+C:\Users\wzwie\OneDrive\Imperatief programmeren\SchetsEditor\bin\Debug\WindowsApplication.exe
+C:\Users\wzwie\OneDrive\Imperatief programmeren\SchetsEditor\bin\Debug\WindowsApplication.pdb
+C:\Users\wzwie\OneDrive\Imperatief programmeren\SchetsEditor\obj\x86\Debug\SchetsEditor.csprojResolveAssemblyReference.cache
+C:\Users\wzwie\OneDrive\Imperatief programmeren\SchetsEditor\obj\x86\Debug\SchetsEditor.Properties.Resources.resources
+C:\Users\wzwie\OneDrive\Imperatief programmeren\SchetsEditor\obj\x86\Debug\SchetsEditor.csproj.GenerateResource.Cache
+C:\Users\wzwie\OneDrive\Imperatief programmeren\SchetsEditor\obj\x86\Debug\WindowsApplication.exe
+C:\Users\wzwie\OneDrive\Imperatief programmeren\SchetsEditor\obj\x86\Debug\WindowsApplication.pdb
