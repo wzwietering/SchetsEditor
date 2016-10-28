@@ -19,6 +19,9 @@ namespace SchetsEditor
         {
             get { return schets; }
         }
+
+        public int lijnDikte = 3;
+
         public SchetsControl()
         {
             this.BorderStyle = BorderStyle.Fixed3D;
@@ -97,6 +100,11 @@ namespace SchetsEditor
             {
                 tool.Letter(this, element.Text);
             }
+        }
+
+        public void VeranderBrush(object obj, EventArgs ea)
+        {
+            lijnDikte = ((TrackBar)obj).Value;
         }
     }
 }

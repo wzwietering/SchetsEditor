@@ -17,6 +17,7 @@ namespace SchetsEditor
     {
         protected Point startpunt;
         protected Brush kwast;
+        protected int brushSize;
 
         public virtual void MuisVast(SchetsControl s, Point p)
         {
@@ -93,23 +94,22 @@ namespace SchetsEditor
         public override void MuisDrag(SchetsControl s, Point p)
         {
             s.Refresh();
-            this.Bezig(s.CreateGraphics(), this.startpunt, p);
+            this.Bezig(s.CreateGraphics(), this.startpunt, p, s);
         }
         public override void MuisLos(SchetsControl s, Point p)
-        {
-            base.MuisLos(s, p);
-            this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
+        {   base.MuisLos(s, p);
+            this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p, s);
             s.Schets.AddElement(this.CreateElement(s, p));
             s.Invalidate();
         }
         public override void Letter(SchetsControl s, char c)
         {
         }
-        public abstract void Bezig(Graphics g, Point p1, Point p2);
+        public abstract void Bezig(Graphics g, Point p1, Point p2, SchetsControl s);
 
-        public virtual void Compleet(Graphics g, Point p1, Point p2)
+        public virtual void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {
-            this.Bezig(g, p1, p2);
+            this.Bezig(g, p1, p2, s);
         }
     }
 
@@ -117,9 +117,9 @@ namespace SchetsEditor
     {
         public override string ToString() { return "kader"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2)
+        public override void Bezig(Graphics g, Point p1, Point p2, SchetsControl s)
         {
-            g.DrawRectangle(MaakPen(kwast, 3), TweepuntTool.Punten2Rechthoek(p1, p2));
+            g.DrawRectangle(MaakPen(kwast, s.lijnDikte), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
     }
 
@@ -127,7 +127,7 @@ namespace SchetsEditor
     {
         public override string ToString() { return "vlak"; }
 
-        public override void Compleet(Graphics g, Point p1, Point p2)
+        public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {
             g.FillRectangle(kwast, TweepuntTool.Punten2Rechthoek(p1, p2));
         }
@@ -137,9 +137,9 @@ namespace SchetsEditor
     {
         public override string ToString() { return "cirkel"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2)
+        public override void Bezig(Graphics g, Point p1, Point p2, SchetsControl s)
         {
-            g.DrawEllipse(MaakPen(kwast, 3), TweepuntTool.Punten2Rechthoek(p1, p2));
+            g.DrawEllipse(MaakPen(kwast, s.lijnDikte), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
     }
 
@@ -147,7 +147,7 @@ namespace SchetsEditor
     {
         public override string ToString() { return "bal"; }
 
-        public override void Compleet(Graphics g, Point p1, Point p2)
+        public override void Compleet(Graphics g, Point p1, Point p2, SchetsControl s)
         {
             g.FillEllipse(kwast, TweepuntTool.Punten2Rechthoek(p1, p2));
         }
@@ -157,9 +157,9 @@ namespace SchetsEditor
     {
         public override string ToString() { return "lijn"; }
 
-        public override void Bezig(Graphics g, Point p1, Point p2)
+        public override void Bezig(Graphics g, Point p1, Point p2, SchetsControl s)
         {
-            g.DrawLine(MaakPen(this.kwast, 3), p1, p2);
+            g.DrawLine(MaakPen(this.kwast, s.lijnDikte), p1, p2);
         }
     }
 
