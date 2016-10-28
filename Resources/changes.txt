@@ -1,0 +1,2 @@
+﻿1. CirkelTool en VolCirkelTool klassen toegevoegd aan tools.cs
+2. Recourses voor cirkel en volcirkel toegevoegd

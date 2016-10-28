@@ -67,6 +67,9 @@
     <None Include="Properties\Settings.settings" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\changes.txt" />
+    <Content Include="Resources\ellips.png" />
+    <Content Include="Resources\fillellips.png" />
     <Content Include="Resources\fillrect.png" />
     <Content Include="Resources\gum.png" />
     <Content Include="Resources\lijn.png" />
