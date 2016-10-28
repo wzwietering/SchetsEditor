@@ -79,26 +79,30 @@ namespace SchetsEditor
             this.Schets.Schoon();
             this.Invalidate();
 
-            var elements = new List<Element>();
-            elements.AddRange(schets.GetElements());
-            schets.ResetAllElements();
+            var objects = new List<DrawnItem>();
+            objects.AddRange(schets.GetObjects());
+            schets.ResetAllObjects();
 
             var color = this.penkleur;
-            foreach (Element element in elements)
+            foreach (DrawnItem obj in objects)
             {
-                this.penkleur = element.color;
-                Redraw(element);
+                this.penkleur = obj.color;
+                Redraw(obj);
             }
         }
 
-        private void Redraw(Element element)
+        private void Redraw(DrawnItem obj)
         {
-            var tool = (ISchetsTool)Activator.CreateInstance(element.toolType);
-            tool.MuisVast(this, element.pointA);
-            tool.MuisLos(this, element.pointB);
-            if(tool.GetType() == typeof(TekstTool))
+            var tool = (ISchetsTool)Activator.CreateInstance(obj.toolType);
+
+            foreach (var element in obj.elements)
             {
-                tool.Letter(this, element.Text);
+                tool.MuisVast(this, element.pointA);
+                tool.MuisLos(this, element.pointB);
+                if (tool.GetType() == typeof(TekstTool))
+                {
+                    tool.Letter(this, element.Text);
+                }
             }
         }
 

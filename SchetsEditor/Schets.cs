@@ -7,7 +7,7 @@ namespace SchetsEditor
 {
     public class Schets
     {
-        private List<Element> elements = new List<Element>();
+        private List<DrawnItem> objects = new List<DrawnItem>();
         private Bitmap bitmap;
 
         public Schets()
@@ -62,27 +62,27 @@ namespace SchetsEditor
             catch (IndexOutOfRangeException i) { }
         }
 
-        internal void AddElement(Element element)
+        internal void AddElement(DrawnItem objects)
         {
-            if (element.toolType != typeof(GumTool))
+            if (objects.toolType != typeof(GumTool))
             {
-                this.elements.Add(element);
+                this.objects.Add(objects);
             }
         }
 
-        internal void ResetAllElements()
+        internal void ResetAllObjects()
         {
-            this.elements.Clear();
+            this.objects.Clear();
         }
 
-        internal List<Element> GetElements()
+        internal List<DrawnItem> GetObjects()
         {
-            return this.elements;
+            return this.objects;
         }
 
-        internal void RemoveElement(Element clickedElement)
+        internal void RemoveElement(DrawnItem clickedObject)
         {
-            this.elements.Remove(clickedElement);
+            this.objects.Remove(clickedObject);
         }
     }
 }

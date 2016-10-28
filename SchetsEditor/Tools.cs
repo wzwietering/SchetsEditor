@@ -18,9 +18,12 @@ namespace SchetsEditor
         protected Point startpunt;
         protected Brush kwast;
 
+        protected DrawnItem drawnItem;
+
         public virtual void MuisVast(SchetsControl s, Point p)
         {
             startpunt = p;
+            drawnItem = new DrawnItem() { color = s.PenKleur, toolType = this.GetType() };
         }
         public virtual void MuisLos(SchetsControl s, Point p)
         {
@@ -31,12 +34,10 @@ namespace SchetsEditor
 
         public virtual Element CreateElement(SchetsControl s, Point p)
         {
-            return new SchetsEditor.Element()
+            return new Element()
             {
-                color = s.PenKleur,
                 pointA = startpunt,
-                pointB = p,
-                toolType = this.GetType()
+                pointB = p
             };
         }
     }
@@ -61,7 +62,8 @@ namespace SchetsEditor
 
                 Element element = base.CreateElement(s, new Point(startpunt.X + (int)sz.Width, startpunt.Y + (int)sz.Height));
                 element.Text = c;
-                s.Schets.AddElement(element);
+                this.drawnItem.elements.Add(element);
+                s.Schets.AddElement(this.drawnItem);
 
                 // gr.DrawRectangle(Pens.Black, startpunt.X, startpunt.Y, sz.Width, sz.Height);
                 startpunt.X += (int)sz.Width;
@@ -96,9 +98,10 @@ namespace SchetsEditor
             this.Bezig(s.CreateGraphics(), this.startpunt, p, s.lijnDikte);
         }
         public override void MuisLos(SchetsControl s, Point p)
-        {   base.MuisLos(s, p);
+        {
+            base.MuisLos(s, p);
             this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p, s);
-            s.Schets.AddElement(this.CreateElement(s, p));
+            this.drawnItem.elements.Add(new Element() { pointA = startpunt, pointB = p });
             s.Invalidate();
         }
         public override void Letter(SchetsControl s, char c)
@@ -120,6 +123,12 @@ namespace SchetsEditor
         {
             g.DrawRectangle(MaakPen(kwast, d), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
+
+        public override void MuisLos(SchetsControl s, Point p)
+        {
+            base.MuisLos(s, p);
+            s.Schets.AddElement(this.drawnItem);
+        }
     }
 
     public class VolRechthoekTool : RechthoekTool
@@ -139,6 +148,12 @@ namespace SchetsEditor
         public override void Bezig(Graphics g, Point p1, Point p2, int d)
         {
             g.DrawEllipse(MaakPen(kwast, d), TweepuntTool.Punten2Rechthoek(p1, p2));
+        }
+
+        public override void MuisLos(SchetsControl s, Point p)
+        {
+            base.MuisLos(s, p);
+            s.Schets.AddElement(this.drawnItem);
         }
     }
 
@@ -160,6 +175,12 @@ namespace SchetsEditor
         {
             g.DrawLine(MaakPen(this.kwast, d), p1, p2);
         }
+
+        public override void MuisLos(SchetsControl s, Point p)
+        {
+            base.MuisLos(s, p);
+            s.Schets.AddElement(this.drawnItem);
+        }
     }
 
     public class PenTool : LijnTool
@@ -168,8 +189,14 @@ namespace SchetsEditor
 
         public override void MuisDrag(SchetsControl s, Point p)
         {
-            this.MuisLos(s, p);
+            base.MuisLos(s, p);
             this.MuisVast(s, p);
+        }
+
+        public override void MuisLos(SchetsControl s, Point p)
+        {
+            base.MuisLos(s, p);
+            s.Schets.AddElement(this.drawnItem);
         }
     }
 
@@ -182,14 +209,14 @@ namespace SchetsEditor
 
         public override void MuisLos(SchetsControl s, Point p)
         {
-            var clickedElements = s.Schets.GetElements().Where(e => e.pointA.X <= p.X 
+            var clickedObjects = s.Schets.GetObjects().Where(o => o.elements.Any(e => e.pointA.X <= p.X
                                             && e.pointA.Y <= p.Y
-                                            && e.pointB.X >= p.X 
-                                            && e.pointB.Y >= p.Y);
-            if (clickedElements != null && clickedElements.Count() > 0)
+                                            && e.pointB.X >= p.X
+                                            && e.pointB.Y >= p.Y));
+            if (clickedObjects != null && clickedObjects.Count() > 0)
             {
-                var clickedElement = clickedElements.Last();
-                s.Schets.RemoveElement(clickedElement);
+                var clickedObject = clickedObjects.Last();
+                s.Schets.RemoveElement(clickedObject);
                 s.RebuildBitmap(this, new EventArgs());
             }
         }
