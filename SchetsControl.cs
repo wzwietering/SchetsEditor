@@ -62,8 +62,12 @@ namespace SchetsEditor
         }
         public void VeranderKleurViaMenu(object obj, EventArgs ea)
         {
-            string kleurNaam = ((ToolStripMenuItem)obj).Text;
-            penkleur = Color.FromName(kleurNaam);
+            ColorDialog kleurDialoog = new ColorDialog();
+            DialogResult resultaat = kleurDialoog.ShowDialog();
+            if(resultaat == DialogResult.OK)
+            {
+                penkleur = kleurDialoog.Color;
+            }
         }
     }
 }

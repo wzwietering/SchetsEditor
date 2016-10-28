@@ -5,6 +5,7 @@
 Het nieuwe gummen:
 3. Element class toegevoegd in nieuwe file
 4. Initialisatie van lijst met Elementen toegevoegd aan Schets class
-5. AddElement() method toegevoegd aan schets class
-6. CreateElement() method toegevoegd aan startpuntTool
-7. Aanroep van CreateElement() Vanuit TekstTool.letter() en vanuit TweepuntTool.MuisLos()
+5. Hoofdscherm heeft een 'Opslaan' knop gekregen in het menu
+6. Schets heeft een 'Opslaan' methode gekregen om een file op te slaan
+7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
+8. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.
