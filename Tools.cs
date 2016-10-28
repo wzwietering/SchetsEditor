@@ -96,7 +96,7 @@ namespace SchetsEditor
         }
         public override void MuisLos(SchetsControl s, Point p)
         {   base.MuisLos(s, p);
-            this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
+            this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p, s);
             s.Schets.AddElement(this.CreateElement(s, p));
             s.Invalidate();
         }

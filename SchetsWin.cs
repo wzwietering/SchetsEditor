@@ -181,10 +181,16 @@ namespace SchetsEditor
             t.TickFrequency = 3;
             t.LargeChange = 3;
             t.SmallChange = 1;
-            t.Location = new Point(l.Location.X + l.Width, 0);
+            t.Location = new Point(340, 0);
             t.Size = new Size(80, 20);
             t.ValueChanged += schetscontrol.VeranderBrush;
             paneel.Controls.Add(t);
+
+            b = new Button();
+            b.Text = "Redraw";
+            b.Location = new Point(420, 0);
+            b.Click += schetscontrol.RebuildBitmap;
+            paneel.Controls.Add(b);
         }
     }
 }

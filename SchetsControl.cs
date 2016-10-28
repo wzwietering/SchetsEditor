@@ -20,7 +20,7 @@ namespace SchetsEditor
             get { return schets; }
         }
 
-        public int lijnDikte = 10;
+        public int lijnDikte = 3;
 
         public SchetsControl()
         {
@@ -97,6 +97,11 @@ namespace SchetsEditor
             {
                 tool.Letter(this, element.Text);
             }
+        }
+
+        public void VeranderBrush(object obj, EventArgs ea)
+        {
+            lijnDikte = ((TrackBar)obj).Value;
         }
     }
 }
