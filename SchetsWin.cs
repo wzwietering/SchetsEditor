@@ -169,6 +169,22 @@ namespace SchetsEditor
             b.Location = new Point(160, 0);
             b.Click += schetscontrol.VeranderKleurViaMenu;
             paneel.Controls.Add(b);
+
+            Label l = new Label();
+            l.Text = "Line thickness:";
+            l.Location = new Point(240, 5);
+            paneel.Controls.Add(l);
+
+            TrackBar t = new TrackBar();
+            t.Minimum = 1;
+            t.Maximum = 30;
+            t.TickFrequency = 3;
+            t.LargeChange = 3;
+            t.SmallChange = 1;
+            t.Location = new Point(l.Location.X + l.Width, 0);
+            t.Size = new Size(80, 20);
+            t.ValueChanged += schetscontrol.VeranderBrush;
+            paneel.Controls.Add(t);
         }
     }
 }
