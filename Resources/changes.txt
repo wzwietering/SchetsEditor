@@ -18,3 +18,7 @@ Colorpicker:
 7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
 8. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.
 9. Variable lijndikte
+
+Lijndikte:
+10.	Lijn hebben een instelbare dikte
+11. In de userinterface is er een slider en een label om dit aan te geven.
