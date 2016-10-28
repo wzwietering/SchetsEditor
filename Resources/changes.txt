@@ -1,4 +1,10 @@
-﻿1. CirkelTool en VolCirkelTool klassen toegevoegd aan tools.cs
+﻿Cirkels tekenen:
+1. CirkelTool en VolCirkelTool klassen toegevoegd aan tools.cs
 2. Recourses voor cirkel en volcirkel toegevoegd
+
+Het nieuwe gummen:
 3. Element class toegevoegd in nieuwe file
 4. Initialisatie van lijst met Elementen toegevoegd aan Schets class
+5. AddElement() method toegevoegd aan schets class
+6. CreateElement() method toegevoegd aan startpuntTool
+7. Aanroep van CreateElement() Vanuit TekstTool.letter() en vanuit TweepuntTool.MuisLos()

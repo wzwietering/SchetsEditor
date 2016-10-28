@@ -25,6 +25,17 @@ namespace SchetsEditor
         }
         public abstract void MuisDrag(SchetsControl s, Point p);
         public abstract void Letter(SchetsControl s, char c);
+
+        public virtual Element CreateElement(SchetsControl s, Point p)
+        {
+            return new SchetsEditor.Element()
+            {
+                color = s.PenKleur,
+                pointA = startpunt,
+                pointB = p,
+                toolType = this.GetType()
+            };
+        }
     }
 
     public class TekstTool : StartpuntTool
@@ -47,6 +58,10 @@ namespace SchetsEditor
                 // gr.DrawRectangle(Pens.Black, startpunt.X, startpunt.Y, sz.Width, sz.Height);
                 startpunt.X += (int)sz.Width;
                 s.Invalidate();
+
+                Element element = base.CreateElement(s, new Point(0, 0));
+                element.Text = tekst;
+                s.Schets.AddElement(element);
             }
         }
     }
@@ -75,6 +90,7 @@ namespace SchetsEditor
         public override void MuisLos(SchetsControl s, Point p)
         {   base.MuisLos(s, p);
             this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
+            s.Schets.AddElement(this.CreateElement(s, p));
             s.Invalidate();
         }
         public override void Letter(SchetsControl s, char c)

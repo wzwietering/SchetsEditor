@@ -66,5 +66,10 @@ namespace SchetsEditor
             //This error is thrown when the user cancels the save
             catch (IndexOutOfRangeException i) { }
         }
+
+        internal void AddElement(Element element)
+        {
+            this.elements.Add(element);
+        }
     }
 }

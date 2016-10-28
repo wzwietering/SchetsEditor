@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace SchetsEditor
 {
-    class Element
+    public class Element
     {
         public Type toolType;
 
