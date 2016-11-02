@@ -14,6 +14,7 @@ Bestanden:
 8. Schets heeft een 'Export' methode gekregen om een file op te slaan als afbeelding.
 9. Hoofdscherm heeft een 'Export' knop gekregen in het menu.
 10. Er is een 'Read' klasse die CSV files kan lezen toegevoegd.
+11. De 'Write' klasse schrijft de objecten naar een CSV.
 
 Colorpicker:
 7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.

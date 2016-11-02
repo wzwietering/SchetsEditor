@@ -18,7 +18,7 @@ namespace SchetsEditor.IO
             StreamWriter fs = new StreamWriter(path);
             foreach(DrawnItem d in objects)
             {
-                string line = d.color.ToString();
+                string line = d.color.ToArgb().ToString();
 
                 foreach(DrawnElement de in d.elements)
                 {
