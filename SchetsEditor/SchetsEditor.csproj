@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="helper.cs" />
+    <Compile Include="IO\Write.cs" />
     <Compile Include="Objects\DrawnElement.cs" />
     <Compile Include="Objects\DrawnItem.cs" />
     <Compile Include="Objects\LineCircle.cs" />
