@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Resources;
+using SchetsEditor.IO;
 
 namespace SchetsEditor
 {
@@ -58,6 +59,20 @@ namespace SchetsEditor
         private void Redo(object obj, EventArgs ea)
         {
 
+        }
+
+        private void Opslaan(object obj, EventArgs ea)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Title = "Save drawing";
+            sfd.Filter = "CSV|*.csv";
+            sfd.FileName = "New drawing";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Write write = new Write();
+                write.WriteCSV(sfd.FileName, schetscontrol.Schets.objects);
+            }
         }
 
         public SchetsWin()
@@ -123,6 +138,9 @@ namespace SchetsEditor
             menu.DropDownItems.Add(tsm);
             tsm = new ToolStripMenuItem("Redo", null, this.Redo);
             tsm.ShortcutKeys = Keys.Control | Keys.Y;
+            menu.DropDownItems.Add(tsm);
+            tsm = new ToolStripMenuItem("Opslaan", null, this.Opslaan);
+            tsm.ShortcutKeys = Keys.Control | Keys.S;
             menu.DropDownItems.Add(tsm);
             tsm = new ToolStripMenuItem("Exporteren", null, this.Export);
             tsm.ShortcutKeys = Keys.Control | Keys.E;

@@ -8,7 +8,7 @@ namespace SchetsEditor
 {
     public class Schets
     {
-        private List<DrawnItem> objects = new List<DrawnItem>();
+        public List<DrawnItem> objects = new List<DrawnItem>();
         private Bitmap bitmap;
 
         public Schets()

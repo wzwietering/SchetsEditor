@@ -21,9 +21,10 @@ Het nieuwe gummen:
 	tekstblokken in een keer gewist worden.
 4.	Reset() method is toegevoegd aan de tool. Dit is ten behoeve van het groeperen van tekst elementen in een drawnItem. 
 
-Opslaan:
+Bestanden:
 8. Schets heeft een 'Export' methode gekregen om een file op te slaan als afbeelding.
-9. Hoofdscherm heeft een 'Export' knop gekregen in het menu
+9. Hoofdscherm heeft een 'Export' knop gekregen in het menu.
+10. Er is een 'Read' klasse die CSV files kan lezen toegevoegd.
 
 Colorpicker:
 7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.

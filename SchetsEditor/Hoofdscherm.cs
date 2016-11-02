@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchetsEditor.IO;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -25,6 +26,9 @@ namespace SchetsEditor
             menu = new ToolStripMenuItem("File");
             ToolStripMenuItem n = new ToolStripMenuItem("Nieuw", null, this.nieuw);
             n.ShortcutKeys = Keys.Control | Keys.N;
+            menu.DropDownItems.Add(n);
+            n = new ToolStripMenuItem("Open", null, this.Open);
+            n.ShortcutKeys = Keys.Control | Keys.O;
             menu.DropDownItems.Add(n);
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
@@ -55,6 +59,12 @@ namespace SchetsEditor
         private void afsluiten(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Open(object sender, EventArgs e)
+        {
+            Read read = new Read();
+            read.ReadCSV(@"C:\Users\wzwie\Desktop\testCSV.csv");
         }
     }
 }
