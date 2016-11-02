@@ -64,17 +64,17 @@
   <ItemGroup>
     <Compile Include="helper.cs" />
     <Compile Include="IO\Write.cs" />
-    <Compile Include="Objects\DrawnElement.cs" />
-    <Compile Include="Objects\DrawnItem.cs" />
-    <Compile Include="Objects\LineCircle.cs" />
-    <Compile Include="Objects\FullCircle.cs" />
-    <Compile Include="Objects\LineRectangle.cs" />
-    <Compile Include="Objects\FullRectangle.cs" />
-    <Compile Include="Objects\Line.cs" />
+    <Compile Include="DrawingObjects\DrawnElement.cs" />
+    <Compile Include="DrawingObjects\DrawnItem.cs" />
+    <Compile Include="DrawingObjects\LineCircle.cs" />
+    <Compile Include="DrawingObjects\FullCircle.cs" />
+    <Compile Include="DrawingObjects\LineRectangle.cs" />
+    <Compile Include="DrawingObjects\FullRectangle.cs" />
+    <Compile Include="DrawingObjects\Line.cs" />
     <Compile Include="Hoofdscherm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Objects\Text.cs" />
+    <Compile Include="DrawingObjects\Text.cs" />
     <Compile Include="IO\Read.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,7 +87,12 @@
     <Compile Include="SchetsWin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools.cs" />
+    <Compile Include="Tools\ISchetsTool.cs" />
+    <Compile Include="Tools\StartpuntTool.cs" />
+    <Compile Include="Tools\TekstTool.cs" />
+    <Compile Include="Tools\GumTool.cs" />
+    <Compile Include="Tools\Pencil.cs" />
+    <Compile Include="Tools\TweepuntTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />

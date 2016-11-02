@@ -4,7 +4,7 @@ using System.Drawing.Drawing2D;
 
 namespace SchetsEditor
 {
-    public static class helper
+    public static class Helper
     {
         public static Pen MaakPen(Brush b, int dikte)
         {

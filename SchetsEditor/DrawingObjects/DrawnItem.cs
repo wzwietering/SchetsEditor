@@ -6,8 +6,6 @@ namespace SchetsEditor
 {
     public class DrawnItem
     {
-        public Type toolType;
-
         public Color color;
 
         public List<DrawnElement> elements = new List<DrawnElement>();
