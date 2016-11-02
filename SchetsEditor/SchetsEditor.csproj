@@ -62,7 +62,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="helper.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="Objects\DrawnElement.cs" />
     <Compile Include="Objects\DrawnItem.cs" />
     <Compile Include="Objects\LineCircle.cs" />
@@ -85,7 +85,12 @@
     <Compile Include="SchetsWin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tools.cs" />
+    <Compile Include="Tools\ISchetsTool.cs" />
+    <Compile Include="Tools\StartpuntTool.cs" />
+    <Compile Include="Tools\TekstTool.cs" />
+    <Compile Include="Tools\GumTool.cs" />
+    <Compile Include="Tools\Pencil.cs" />
+    <Compile Include="Tools\TweepuntTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />

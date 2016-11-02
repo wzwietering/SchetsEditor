@@ -84,7 +84,10 @@ namespace SchetsEditor
             var color = this.penkleur;
             foreach (DrawnItem item in items)
             {
-                item.Draw(this);
+                if (item != null)
+                {
+                    item.Draw(this);
+                }
             }
         }
 

@@ -10,7 +10,7 @@ namespace SchetsEditor
 
         public override void Draw(Graphics g, Brush brush)
         {
-            g.DrawRectangle(helper.MaakPen(brush, LineThickness), helper.Punten2Rechthoek(this.pointA, this.pointB));
+            g.DrawRectangle(Helper.MaakPen(brush, LineThickness), Helper.Punten2Rechthoek(this.pointA, this.pointB));
         }
 
         public override bool WasClicked(Point p)

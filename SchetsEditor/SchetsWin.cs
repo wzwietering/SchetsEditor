@@ -30,13 +30,13 @@ namespace SchetsEditor
 
         private void klikToolMenu(object obj, EventArgs ea)
         {
-            this.huidigeTool.Reset(schetscontrol);
+            this.huidigeTool.Finalize(schetscontrol);
             this.huidigeTool = (ISchetsTool)((ToolStripMenuItem)obj).Tag;
         }
 
         private void klikToolButton(object obj, EventArgs ea)
         {
-            this.huidigeTool.Reset(schetscontrol);
+            this.huidigeTool.Finalize(schetscontrol);
             this.huidigeTool = (ISchetsTool)((RadioButton)obj).Tag;
         }
 
@@ -65,7 +65,8 @@ namespace SchetsEditor
             ISchetsTool[] deTools = {// new PenTool()
                                      //  , new LijnTool()
                                      //, 
-                                     new TweepuntTool<Line>()
+                                      new TweepuntTool<Line>()
+                                    , new Pencil()
                                     , new TweepuntTool<FullRectangle>()
                                     , new TweepuntTool<LineRectangle>()
                                     , new TweepuntTool<FullCircle>()

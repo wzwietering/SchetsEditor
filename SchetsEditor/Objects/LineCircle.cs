@@ -9,12 +9,12 @@ namespace SchetsEditor
 
         public override void Draw(Graphics g, Brush brush)
         {
-            g.DrawEllipse(helper.MaakPen(brush, LineThickness), helper.Punten2Rechthoek(this.pointA, this.pointB));
+            g.DrawEllipse(Helper.MaakPen(brush, LineThickness), Helper.Punten2Rechthoek(this.pointA, this.pointB));
         }
 
         public override bool WasClicked(Point p)
         {
-            return helper.EllipseClicked(pointA, pointB, p, LineThickness) && !helper.EllipseClicked(pointA, pointB, p, -LineThickness); 
+            return Helper.EllipseClicked(pointA, pointB, p, LineThickness) && !Helper.EllipseClicked(pointA, pointB, p, -LineThickness); 
         }
     }
 }

@@ -17,7 +17,7 @@ namespace SchetsEditor
         public override void Draw(Graphics g, Brush brush)
         {
             base.Draw(g, brush);
-            g.FillRectangle(brush, helper.Punten2Rechthoek(this.pointA, this.pointB));
+            g.FillRectangle(brush, Helper.Punten2Rechthoek(this.pointA, this.pointB));
         }
     }
 }

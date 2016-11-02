@@ -77,10 +77,7 @@ namespace SchetsEditor
 
         internal void AddElement(DrawnItem objects)
         {
-            if (objects.toolType != typeof(GumTool))
-            {
-                this.objects.Add(objects);
-            }
+           this.objects.Add(objects);
         }
 
         internal void ResetAllObjects()
