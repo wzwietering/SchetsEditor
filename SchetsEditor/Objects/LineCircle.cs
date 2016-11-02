@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace SchetsEditor
 {
@@ -13,8 +14,7 @@ namespace SchetsEditor
 
         public override bool WasClicked(Point p)
         {
-            return (this.pointA.X <= p.X && this.pointA.Y <= p.Y
-                && this.pointB.X >= p.X && this.pointB.Y >= p.Y);
+            return helper.EllipseClicked(pointA, pointB, p, LineThickness) && !helper.EllipseClicked(pointA, pointB, p, -LineThickness); 
         }
     }
 }

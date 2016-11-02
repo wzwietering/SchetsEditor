@@ -21,5 +21,22 @@ namespace SchetsEditor
                                 );
         }
 
+        public static double distance(Point a, Point b)
+        {
+            int dX = a.X - b.X;
+            int dY = a.Y - b.Y;
+            return Math.Sqrt(dX * dX + dY * dY);
+        }
+
+        public static bool EllipseClicked(Point pointA, Point pointB, Point p, int lineThickness)
+        {
+            Point center = new Point(pointA.X + (pointB.X - pointA.X) / 2, pointA.Y + (pointB.Y - pointA.Y) / 2);
+            double h = center.X;
+            double k = center.Y;
+            double rx = Math.Abs(pointA.X - pointB.X) / 2 + lineThickness / 2;
+            double ry = Math.Abs(pointA.Y - pointB.Y) / 2 + lineThickness / 2;
+
+            return (((p.X - h) * (p.X - h)) / (rx * rx) + ((p.Y - k) * (p.Y - k)) / (ry * ry) <= 1);
+        }
     }
 }
