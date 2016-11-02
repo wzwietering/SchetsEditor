@@ -23,9 +23,10 @@ namespace SchetsEditor
         {
             ToolStripDropDownItem menu;
             menu = new ToolStripMenuItem("File");
-            menu.DropDownItems.Add("Nieuw", null, this.nieuw);
-            menu.DropDownItems.Add("Opslaan", null, this.Opslaan);
-            menu.DropDownItems.Add("Exit", null, this.afsluiten);
+            ToolStripMenuItem n = new ToolStripMenuItem("Nieuw", null, this.nieuw);
+            n.ShortcutKeys = Keys.Control | Keys.N;
+            menu.DropDownItems.Add(n);
+            menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
         }
         private void maakHelpMenu()
@@ -49,11 +50,6 @@ namespace SchetsEditor
             SchetsWin s = new SchetsWin();
             s.MdiParent = this;
             s.Show();
-        }
-
-        private void Opslaan(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         private void afsluiten(object sender, EventArgs e)

@@ -24,6 +24,8 @@ namespace SchetsEditor
             schetscontrol.Size = new Size(this.ClientSize.Width - 70
                                           , this.ClientSize.Height - 50);
             paneel.Location = new Point(64, this.ClientSize.Height - 30);
+            schetscontrol.Schets.VeranderAfmeting(schetscontrol.Size);
+            schetscontrol.RebuildBitmap(this, new EventArgs());
         }
 
         private void klikToolMenu(object obj, EventArgs ea)
@@ -41,6 +43,21 @@ namespace SchetsEditor
         private void afsluiten(object obj, EventArgs ea)
         {
             this.Close();
+        }
+
+        private void Export(object obj, EventArgs ea)
+        {
+            schetscontrol.Schets.Export();
+        }
+
+        private void Undo(object obj, EventArgs ea)
+        {
+
+        }
+
+        private void Redo(object obj, EventArgs ea)
+        {
+
         }
 
         public SchetsWin()
@@ -100,7 +117,16 @@ namespace SchetsEditor
         {
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
-            menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
+            ToolStripMenuItem tsm = new ToolStripMenuItem("Undo", null, this.Undo);
+            tsm.ShortcutKeys = Keys.Control | Keys.Z;
+            menu.DropDownItems.Add(tsm);
+            tsm = new ToolStripMenuItem("Redo", null, this.Redo);
+            tsm.ShortcutKeys = Keys.Control | Keys.Y;
+            menu.DropDownItems.Add(tsm);
+            tsm = new ToolStripMenuItem("Exporteren", null, this.Export);
+            tsm.ShortcutKeys = Keys.Control | Keys.E;
+            menu.DropDownItems.Add(tsm);
+            menu.DropDownItems.Add("Sluit tekening", null, this.afsluiten);
             menuStrip.Items.Add(menu);
         }
 
@@ -155,8 +181,7 @@ namespace SchetsEditor
             paneel.Size = new Size(600, 30);
             this.Controls.Add(paneel);
 
-            Button b;
-            b = new Button();
+            Button b = new Button();
             b.Text = "Clear";
             b.Location = new Point(0, 0);
             b.Click += schetscontrol.Schoon;

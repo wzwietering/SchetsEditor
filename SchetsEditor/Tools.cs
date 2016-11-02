@@ -19,7 +19,6 @@ namespace SchetsEditor
     {
         protected Point startpunt;
         protected Brush kwast;
-        protected int brushSize;
 
         protected DrawnItem drawnItem;
 
