@@ -43,6 +43,11 @@ namespace SchetsEditor
             this.Close();
         }
 
+        private void Export(object obj, EventArgs ea)
+        {
+            schetscontrol.Schets.Export();
+        }
+
         public SchetsWin()
         {
             ISchetsTool[] deTools = { new PenTool()
@@ -98,7 +103,10 @@ namespace SchetsEditor
         {
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
-            menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
+            ToolStripMenuItem e = new ToolStripMenuItem("Exporteren", null, this.Export);
+            e.ShortcutKeys = Keys.Control | Keys.E;
+            menu.DropDownItems.Add(e);
+            menu.DropDownItems.Add("Sluit tekening", null, this.afsluiten);
             menuStrip.Items.Add(menu);
         }
 

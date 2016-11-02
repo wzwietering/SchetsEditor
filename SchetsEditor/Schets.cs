@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace SchetsEditor
@@ -12,7 +13,7 @@ namespace SchetsEditor
 
         public Schets()
         {
-            bitmap = new Bitmap(1, 1);
+            bitmap = new Bitmap(1, 1, PixelFormat.Format32bppArgb);
         }
         public Graphics BitmapGraphics
         {
@@ -40,18 +41,21 @@ namespace SchetsEditor
             bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
         }
 
-        public void Opslaan()
+        /// <summary>
+        /// Export shows a savefiledialog to save the image as an image file
+        /// </summary>
+        public void Export()
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Save Image";
-            sfd.Filter = "PNG|*.png|JPEG|*.jpg|Bitmap Image|*.bmp|GIF|*.gif|";
+            sfd.Filter = "PNG|*.png|JPEG|*.jpg|Bitmap Image|*.bmp|GIF|*.gif";
             sfd.FileName = "New image";
             sfd.ShowDialog();
 
             try
             {
                 System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile();
-                bitmap.Save(fs, System.Drawing.Imaging.ImageFormat.Png);
+                bitmap.Save(fs, ImageFormat.Png);
             }
             //When there is no image, this error is thrown
             catch (NullReferenceException nre)

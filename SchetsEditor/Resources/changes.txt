@@ -5,14 +5,14 @@
 Het nieuwe gummen:
 3. Element class toegevoegd in nieuwe file
 4. Initialisatie van lijst met Elementen toegevoegd aan Schets class
-5. Hoofdscherm heeft een 'Opslaan' knop gekregen in het menu
 6. Schets heeft een AddElement, RemoveElement, ResetAllElements en GetElements zodat elementen kunnen worden toegevoegd/opgehaald.
 7. Schetscontrol heeft een RebuildBitmap die voor elk element in de schets de Redraw method aanroept die het element opnieuw tekent.
 8. Gum is nu een subclass van StartpuntTool (want alleen een keer klikken is genoeg om te gummen) en heeft zijn eigen implementatie van muislos 
    die het laatst toegevoegde element op die coordinaten opzoekt en wist.
 
 Opslaan:
-6. Schets heeft een 'Opslaan' methode gekregen om een file op te slaan
+8. Schets heeft een 'Export' methode gekregen om een file op te slaan als afbeelding.
+9. Hoofdscherm heeft een 'Export' knop gekregen in het menu
 
 Colorpicker:
 7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
@@ -25,3 +25,6 @@ Lijndikte:
 
 Bitmap resize:
 12. Bitmap wordt opnieuw gemaakt als het window geresized wordt, zodat hij de afmetingen van het window heeft.
+
+Overig:
+13. Een nieuwe afbeelding kan nu met een keyboard shortcut geopend worden.
