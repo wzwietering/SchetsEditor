@@ -88,7 +88,7 @@ namespace SchetsEditor
             this.objects.Clear();
         }
 
-        internal List<DrawnItem> GetObjects()
+        internal List<DrawnItem> GetDrawnItems()
         {
             return this.objects;
         }
