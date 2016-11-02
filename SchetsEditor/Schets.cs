@@ -50,16 +50,13 @@ namespace SchetsEditor
             sfd.Title = "Save Image";
             sfd.Filter = "PNG|*.png|JPEG|*.jpg|Bitmap Image|*.bmp|GIF|*.gif";
             sfd.FileName = "New image";
-            ImageFormat f = ImageFormat.Png;
 
             if(sfd.ShowDialog() == DialogResult.OK)
             {
+                ImageFormat f;
                 String extension = System.IO.Path.GetExtension(sfd.FileName);
                 switch (extension)
                 {
-                    case ".png":
-                        f = ImageFormat.Png;
-                        break;
                     case ".jpg":
                         f = ImageFormat.Jpeg;
                         break;
@@ -68,6 +65,9 @@ namespace SchetsEditor
                         break;
                     case ".gif":
                         f = ImageFormat.Gif;
+                        break;
+                    default:
+                        f = ImageFormat.Png;
                         break;
                 }
                 System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile();
