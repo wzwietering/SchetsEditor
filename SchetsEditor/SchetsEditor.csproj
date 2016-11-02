@@ -94,6 +94,8 @@
     <Content Include="Resources\lijn.png" />
     <Content Include="Resources\Pen.png" />
     <Content Include="Resources\rect.png" />
+    <Content Include="Resources\Undo.png" />
+    <Content Include="Resources\Redo.png" />
     <Content Include="Resources\text.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />

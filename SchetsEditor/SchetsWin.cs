@@ -48,6 +48,16 @@ namespace SchetsEditor
             schetscontrol.Schets.Export();
         }
 
+        private void Undo(object obj, EventArgs ea)
+        {
+
+        }
+
+        private void Redo(object obj, EventArgs ea)
+        {
+
+        }
+
         public SchetsWin()
         {
             ISchetsTool[] deTools = { new PenTool()
@@ -103,9 +113,15 @@ namespace SchetsEditor
         {
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
-            ToolStripMenuItem e = new ToolStripMenuItem("Exporteren", null, this.Export);
-            e.ShortcutKeys = Keys.Control | Keys.E;
-            menu.DropDownItems.Add(e);
+            ToolStripMenuItem tsm = new ToolStripMenuItem("Undo", null, this.Undo);
+            tsm.ShortcutKeys = Keys.Control | Keys.Z;
+            menu.DropDownItems.Add(tsm);
+            tsm = new ToolStripMenuItem("Redo", null, this.Redo);
+            tsm.ShortcutKeys = Keys.Control | Keys.Y;
+            menu.DropDownItems.Add(tsm);
+            tsm = new ToolStripMenuItem("Exporteren", null, this.Export);
+            tsm.ShortcutKeys = Keys.Control | Keys.E;
+            menu.DropDownItems.Add(tsm);
             menu.DropDownItems.Add("Sluit tekening", null, this.afsluiten);
             menuStrip.Items.Add(menu);
         }
