@@ -50,20 +50,29 @@ namespace SchetsEditor
             sfd.Title = "Save Image";
             sfd.Filter = "PNG|*.png|JPEG|*.jpg|Bitmap Image|*.bmp|GIF|*.gif";
             sfd.FileName = "New image";
-            sfd.ShowDialog();
+            ImageFormat f = ImageFormat.Png;
 
-            try
+            if(sfd.ShowDialog() == DialogResult.OK)
             {
+                String extension = System.IO.Path.GetExtension(sfd.FileName);
+                switch (extension)
+                {
+                    case ".png":
+                        f = ImageFormat.Png;
+                        break;
+                    case ".jpg":
+                        f = ImageFormat.Jpeg;
+                        break;
+                    case ".bmp":
+                        f = ImageFormat.Bmp;
+                        break;
+                    case ".gif":
+                        f = ImageFormat.Gif;
+                        break;
+                }
                 System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile();
-                bitmap.Save(fs, ImageFormat.Png);
+                bitmap.Save(fs, f);
             }
-            //When there is no image, this error is thrown
-            catch (NullReferenceException nre)
-            {
-                MessageBox.Show("No image available\n" + nre);
-            }
-            //This error is thrown when the user cancels the save
-            catch (IndexOutOfRangeException i) { }
         }
 
         internal void AddElement(DrawnItem objects)
