@@ -10,8 +10,7 @@ namespace SchetsEditor
 
         public override bool WasClicked(Point p)
         {
-            return (this.pointA.X <= p.X && this.pointA.Y <= p.Y
-                && this.pointB.X >= p.X && this.pointB.Y >= p.Y);
+            return helper.EllipseClicked(pointA, pointB, p, 0);
         }
 
         public override void Draw(Graphics g, Brush brush)

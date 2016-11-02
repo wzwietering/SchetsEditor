@@ -15,19 +15,12 @@ namespace SchetsEditor
 
         public override bool WasClicked(Point p)
         {
-            double dAB = distance(pointA, pointB);
-            double dApB = distance(pointA, p) + distance(pointB, p);
+            double dAB = helper.distance(pointA, pointB);
+            double dApB = helper.distance(pointA, p) + helper.distance(pointB, p);
 
-            if (dAB - 2 <= dApB && dAB + 2 >= dApB)
+            if (dAB - 0.5 * LineThickness <= dApB && dAB + 0.5 * LineThickness >= dApB)
                 return true; // p is on the line.
             return false;    // p is not on the line.
-        }
-
-        private double distance (Point a, Point b)
-        {
-            int dX = a.X - b.X;
-            int dY = a.Y - b.Y;
-            return Math.Sqrt(dX * dX + dY * dY);
         }
     }
 }
