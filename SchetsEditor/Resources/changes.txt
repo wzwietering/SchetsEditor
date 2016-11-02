@@ -10,9 +10,10 @@ Het nieuwe gummen:
 8. Gum is nu een subclass van StartpuntTool (want alleen een keer klikken is genoeg om te gummen) en heeft zijn eigen implementatie van muislos 
    die het laatst toegevoegde element op die coordinaten opzoekt en wist.
 
-Opslaan:
+Bestanden:
 8. Schets heeft een 'Export' methode gekregen om een file op te slaan als afbeelding.
-9. Hoofdscherm heeft een 'Export' knop gekregen in het menu
+9. Hoofdscherm heeft een 'Export' knop gekregen in het menu.
+10. Er is een 'Read' klasse die CSV files kan lezen toegevoegd.
 
 Colorpicker:
 7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
