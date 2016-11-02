@@ -8,7 +8,7 @@ namespace SchetsEditor
 {
     public class Schets
     {
-        public List<DrawnItem> objects = new List<DrawnItem>();
+        public List<DrawnItem> drawnItems = new List<DrawnItem>();
         private Bitmap bitmap;
 
         public Schets()
@@ -77,22 +77,22 @@ namespace SchetsEditor
 
         internal void AddElement(DrawnItem objects)
         {
-           this.objects.Add(objects);
+           this.drawnItems.Add(objects);
         }
 
         internal void ResetAllObjects()
         {
-            this.objects.Clear();
+            this.drawnItems.Clear();
         }
 
         internal List<DrawnItem> GetDrawnItems()
         {
-            return this.objects;
+            return this.drawnItems;
         }
 
         internal void RemoveElement(DrawnItem clickedObject)
         {
-            this.objects.Remove(clickedObject);
+            this.drawnItems.Remove(clickedObject);
         }
     }
 }

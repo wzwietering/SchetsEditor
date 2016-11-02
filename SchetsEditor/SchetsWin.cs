@@ -71,7 +71,7 @@ namespace SchetsEditor
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Write write = new Write();
-                write.WriteCSV(sfd.FileName, schetscontrol.Schets.objects);
+                write.WriteCSV(sfd.FileName, schetscontrol.Schets.drawnItems);
             }
         }
 
