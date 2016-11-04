@@ -13,25 +13,28 @@ namespace SchetsEditor.IO
         /// Creates a XML with all the information about the drawing
         /// </summary>
         /// <param name="path">The place to save the XML</param>
-        /// <param name="objects">The objects to save</param>
-        public void WriteXML(string path, List<DrawnItem> objects)
+        /// <param name="items">The items to save</param>
+        public void WriteXML(string path, List<DrawnItem> items)
         {
-            XElement xml = new XElement("Objects");
-            foreach(DrawnItem obj in objects)
+            XElement xml = new XElement("Items");
+            foreach (DrawnItem obj in items)
             {
-                foreach (DrawnElement el in obj.elements)
+                if (obj.elements[0] is Objects.Text)
                 {
-                    if(el is Objects.Text)
-                    {
-                        xml.Add(new XElement("TextObject", new XElement("Color", obj.color.ToArgb()), new XElement("Elements",
-                            new XElement("Type", el.GetType().ToString()),
-                            new XElement("Text", ((Objects.Text)el).text),
-                            new XElement("Font", ((Objects.Text)el).font),
-                            new XElement("PointA", el.pointA),
-                            new XElement("PointB", el.pointB)
-                            )));
-                    }
-                    else
+                    xml.Add(new XElement("TextObject", from el in obj.elements
+                                                       select new XElement("TextElement", 
+                                                       new XElement("Color", obj.color.ToArgb()), 
+                                                       new XElement("Elements",
+                                                            new XElement("Type", el.GetType().ToString()),
+                                                            new XElement("Text", ((Objects.Text)el).text),
+                                                            new XElement("Font", ((Objects.Text)el).font),
+                                                            new XElement("PointA", el.pointA),
+                                                            new XElement("PointB", el.pointB)
+                                                            ))));
+                }
+                else
+                {
+                    foreach (DrawnElement el in obj.elements)
                     {
                         xml.Add(new XElement("Object", new XElement("Color", obj.color.ToArgb()), new XElement("Elements",
                             new XElement("Type", el.GetType().ToString()),
