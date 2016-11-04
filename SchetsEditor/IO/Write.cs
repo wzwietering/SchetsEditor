@@ -24,14 +24,13 @@ namespace SchetsEditor.IO
                     xml.Add(new XElement("TextObject",
                                                        new XElement("Color", obj.color.ToArgb()),
                                                        from el in obj.elements
-                                                       select new XElement("TextElement", 
-                                                       new XElement("Elements",
+                                                       select new XElement("TextElements", 
                                                             new XElement("Type", el.GetType().ToString()),
                                                             new XElement("Text", ((Objects.Text)el).text),
                                                             new XElement("Font", ((Objects.Text)el).font),
                                                             new XElement("PointA", el.pointA),
                                                             new XElement("PointB", el.pointB)
-                                                            ))));
+                                                            )));
                 }
                 else
                 {
@@ -39,12 +38,11 @@ namespace SchetsEditor.IO
                                                 new XElement("Color", obj.color.ToArgb()),
                                                 from el in obj.elements
                                                 select new XElement("Elements",
-                                                new XElement("Element",
                                                     new XElement("Type", el.GetType().ToString()),
                                                     new XElement("PointA", el.pointA),
                                                     new XElement("PointB", el.pointB),
                                                     new XElement("Thickness", el.LineThickness)
-                                                    ))));
+                                                    )));
                 }
             }
             xml.Save(path);

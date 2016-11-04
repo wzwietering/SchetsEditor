@@ -22,22 +22,22 @@ Het nieuwe gummen:
 4.	Reset() method is toegevoegd aan de tool. Dit is ten behoeve van het groeperen van tekst elementen in een drawnItem. 
 
 Bestanden:
-8. Schets heeft een 'Export' methode gekregen om een file op te slaan als afbeelding.
-9. Hoofdscherm heeft een 'Export' knop gekregen in het menu.
-10. Er is een 'Read' klasse die CSV files kan lezen toegevoegd.
-11. De 'Write' klasse schrijft de objecten naar een CSV.
+1. Schets heeft een 'Export' methode gekregen om een file op te slaan als afbeelding.
+2. Hoofdscherm heeft een 'Export' knop gekregen in het menu.
+3. Er is een 'Read' klasse die XML files kan lezen toegevoegd.
+4. De 'Write' klasse schrijft de objecten en hun variabelen naar een XML.
 
 Colorpicker:
-7. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
-8. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.
-9. Variable lijndikte
+1. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
+2. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.
+3. Variable lijndikte
 
 Lijndikte:
-10.	Lijn hebben een instelbare dikte
-11. In de userinterface is er een slider en een label om dit aan te geven.
+1.	Lijn hebben een instelbare dikte
+2. In de userinterface is er een slider en een label om dit aan te geven.
 
 Bitmap resize:
-12. Bitmap wordt opnieuw gemaakt als het window geresized wordt, zodat hij de afmetingen van het window heeft.
+1. Bitmap wordt opnieuw gemaakt als het window geresized wordt, zodat hij de afmetingen van het window heeft.
 
 Overig:
-13. Een nieuwe afbeelding kan nu met een keyboard shortcut geopend worden.
+1. Een nieuwe afbeelding kan nu met een keyboard shortcut geopend worden.

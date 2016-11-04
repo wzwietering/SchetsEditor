@@ -5,6 +5,11 @@ namespace SchetsEditor.IO
 {
     class Read
     {
+        public void ReadXML(string path)
+        {
+
+        }
+
         /// <summary>
         /// Reads a CSV file
         /// </summary>

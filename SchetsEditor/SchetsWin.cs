@@ -71,6 +71,7 @@ namespace SchetsEditor
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
+                huidigeTool.Finalize(schetscontrol);
                 Write write = new Write();
                 write.WriteXML(sfd.FileName, schetscontrol.Schets.drawnItems);
             }

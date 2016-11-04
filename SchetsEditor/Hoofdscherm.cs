@@ -64,7 +64,6 @@ namespace SchetsEditor
         private void Open(object sender, EventArgs e)
         {
             Read read = new Read();
-            read.ReadCSV(@"C:\Users\wzwie\Desktop\testCSV.csv");
         }
     }
 }
