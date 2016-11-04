@@ -11,7 +11,7 @@ namespace SchetsEditor
     public class SchetsWin : Form
     {
         MenuStrip menuStrip;
-        SchetsControl schetscontrol;
+        public SchetsControl schetscontrol;
         ISchetsTool huidigeTool;
         Panel paneel;
         bool vast;
@@ -79,18 +79,7 @@ namespace SchetsEditor
 
         public SchetsWin()
         {
-            ISchetsTool[] deTools = {// new PenTool()
-                                     //  , new LijnTool()
-                                     //, 
-                                      new TweepuntTool<Line>()
-                                    , new Pencil()
-                                    , new TweepuntTool<FullRectangle>()
-                                    , new TweepuntTool<LineRectangle>()
-                                    , new TweepuntTool<FullCircle>()
-                                    , new TweepuntTool<LineCircle>()
-                                    , new TekstTool()
-                                    , new GumTool()
-                                    };
+            ISchetsTool[] deTools = GetTools();
 
             this.ClientSize = new Size(700, 500);
             huidigeTool = deTools[0];
@@ -243,6 +232,24 @@ namespace SchetsEditor
             b.Location = new Point(380, 0);
             b.Click += schetscontrol.RebuildBitmap;
             paneel.Controls.Add(b);
+        }
+
+        /// <summary>
+        /// Gives a list of all available tools
+        /// </summary>
+        /// <returns>The list of tools</returns>
+        public ISchetsTool[] GetTools()
+        {
+            ISchetsTool[] tools = {   new TweepuntTool<Line>()
+                                    , new Pencil()
+                                    , new TweepuntTool<FullRectangle>()
+                                    , new TweepuntTool<LineRectangle>()
+                                    , new TweepuntTool<FullCircle>()
+                                    , new TweepuntTool<LineCircle>()
+                                    , new TekstTool()
+                                    , new GumTool()
+                                    };
+            return tools;
         }
     }
 }

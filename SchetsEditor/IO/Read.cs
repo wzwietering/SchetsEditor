@@ -1,55 +1,38 @@
 ﻿using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace SchetsEditor.IO
 {
     class Read
     {
-        public void ReadXML(string path)
+        public void ReadXML(string path, SchetsWin sw)
         {
-
-        }
-
-        /// <summary>
-        /// Reads a CSV file
-        /// </summary>
-        /// <param name="path">The location of the file to read</param>
-        public void ReadCSV(string path)
-        {
-            StreamReader sr = new StreamReader(path);
-            string line;
-            while ((line = sr.ReadLine()) != null)
+            XDocument xml = XDocument.Load(path);
+            ISchetsTool[] ist = sw.GetTools();
+            foreach (var o in xml.Descendants("Object"))
             {
-                //Commas can be escaped in the file using '\'.  It is replaced by a '#' to correct this later on
-                char[] c = line.ToCharArray();
-                for(int a = 0; a < c.Length - 1; a++)
+                if (o.Element("Elements").Element("Type").Value == "SchetsEditor.FullRectangle")
                 {
-                    if (c[a] == '\\') c[a + 1] = '#';
+
                 }
-                line = new string(c);
-
-                string[] variables = line.Split(',');
-                for(int i = 0; i < variables.Length; i++)
+                else if (o.Element("Elements").Element("Type").Value == "SchetsEditor.LineRectangle")
                 {
-                    c = variables[i].ToCharArray();
 
-                    //Remove escape characters
-                    char backslash = '\\';
-                    c = c.Where(j => j != backslash).ToArray();
+                }
+                else if (o.Element("Elements").Element("Type").Value == "SchetsEditor.Line")
+                {
 
-                    //Replace escaped commas with a comma
-                    for (int b = 0; b < c.Length; b++)
-                    {
-                        if(c[b] == '#')
-                        {
-                            c[b] = ',';
-                        }
-                    }
-                    variables[i] = new string(c);
-                    System.Diagnostics.Debug.WriteLine(variables[i]);
+                }
+                else if (o.Element("Elements").Element("Type").Value == "SchetsEditor.LineCircle")
+                {
+
+                }
+                else if (o.Element("Elements").Element("Type").Value == "SchetsEditor.FullCircle")
+                {
+
                 }
             }
-            sr.Close();
         }
     }
 }

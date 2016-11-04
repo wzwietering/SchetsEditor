@@ -61,9 +61,24 @@ namespace SchetsEditor
             this.Close();
         }
 
+        /// <summary>
+        /// Opens an XML file
+        /// </summary>
         private void Open(object sender, EventArgs e)
         {
-            Read read = new Read();
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Choose the file to open";
+            ofd.Filter = "XML|*.xml";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                SchetsWin s = new SchetsWin();
+                s.MdiParent = this;
+
+                Read read = new Read();
+                read.ReadXML(ofd.FileName, s);
+
+                s.Show();
+            }
         }
     }
 }
