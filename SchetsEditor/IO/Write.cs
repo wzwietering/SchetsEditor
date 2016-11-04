@@ -3,30 +3,46 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 
 namespace SchetsEditor.IO
 {
     class Write
     {
         /// <summary>
-        /// Maakt een csv file met alle data van de tekening
+        /// Creates a XML with all the information about the drawing
         /// </summary>
-        /// <param name="path">De locatie om het bestand op te slaan</param>
-        /// <param name="objects">De objecten die opgeslagen moeten worden</param>
-        public void WriteCSV(string path, List<DrawnItem> objects)
+        /// <param name="path">The place to save the XML</param>
+        /// <param name="objects">The objects to save</param>
+        public void WriteXML(string path, List<DrawnItem> objects)
         {
-            StreamWriter fs = new StreamWriter(path);
-            foreach(DrawnItem d in objects)
+            XElement xml = new XElement("Objects");
+            foreach(DrawnItem obj in objects)
             {
-                string line = d.color.ToArgb().ToString();
-
-                foreach(DrawnElement de in d.elements)
+                foreach (DrawnElement el in obj.elements)
                 {
-                    line = line + "," + de.GetType().ToString() + "," + de.pointA + "," + de.pointB + "," + de.LineThickness;
+                    if(el is Objects.Text)
+                    {
+                        xml.Add(new XElement("TextObject", new XElement("Color", obj.color.ToArgb()), new XElement("Elements",
+                            new XElement("Type", el.GetType().ToString()),
+                            new XElement("Text", ((Objects.Text)el).text),
+                            new XElement("Font", ((Objects.Text)el).font),
+                            new XElement("PointA", el.pointA),
+                            new XElement("PointB", el.pointB)
+                            )));
+                    }
+                    else
+                    {
+                        xml.Add(new XElement("Object", new XElement("Color", obj.color.ToArgb()), new XElement("Elements",
+                            new XElement("Type", el.GetType().ToString()),
+                            new XElement("PointA", el.pointA),
+                            new XElement("PointB", el.pointB),
+                            new XElement("Thickness", el.LineThickness)
+                            )));
+                    }
                 }
-                fs.WriteLine(line);
             }
-            fs.Close();
+            xml.Save(path);
         }
     }
 }
