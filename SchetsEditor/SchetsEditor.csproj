@@ -62,6 +62,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawingObjects\UndoItem.cs" />
     <Compile Include="helper.cs" />
     <Compile Include="IO\Write.cs" />
     <Compile Include="DrawingObjects\DrawnElement.cs" />

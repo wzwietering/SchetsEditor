@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchetsEditor.DrawingObjects;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -8,7 +9,9 @@ namespace SchetsEditor
 {
     public class Schets
     {
-        public List<DrawnItem> drawnItems = new List<DrawnItem>();
+        internal List<DrawnItem> drawnItems = new List<DrawnItem>();
+        internal Stack<UndoItem> undoStack = new Stack<UndoItem>();
+
         private Bitmap bitmap;
 
         public Schets()
