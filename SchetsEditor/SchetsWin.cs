@@ -66,13 +66,13 @@ namespace SchetsEditor
         {
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "Save drawing";
-            sfd.Filter = "CSV|*.csv";
+            sfd.Filter = "XML|*.xml";
             sfd.FileName = "New drawing";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 Write write = new Write();
-                write.WriteCSV(sfd.FileName, schetscontrol.Schets.drawnItems);
+                write.WriteXML(sfd.FileName, schetscontrol.Schets.drawnItems);
             }
         }
 
