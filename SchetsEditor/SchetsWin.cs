@@ -53,12 +53,13 @@ namespace SchetsEditor
 
         private void Undo(object obj, EventArgs ea)
         {
-
+            schetscontrol.Undo();
+            
         }
 
         private void Redo(object obj, EventArgs ea)
         {
-
+            schetscontrol.Redo();
         }
 
         private void Opslaan(object obj, EventArgs ea)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchetsEditor.DrawingObjects;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -64,11 +65,37 @@ namespace SchetsEditor
             string kleurNaam = ((ComboBox)obj).Text;
             penkleur = Color.FromName(kleurNaam);
         }
+
+        internal void Redo()
+        {
+            if (schets.undoStack.Count > 0)
+            {
+                UndoItem item = schets.undoStack.Pop();
+                schets.drawnItems.Insert(item.index, item.item);
+                this.RebuildBitmap(this, new EventArgs());
+            }
+        }
+
+        internal void Undo()
+        {
+            if (schets.drawnItems.Count > 0)
+            {
+                var item = new UndoItem()
+                {
+                    item = schets.drawnItems[schets.drawnItems.Count - 1],
+                    index = schets.drawnItems.Count - 1,
+                };
+                schets.undoStack.Push(item);
+                schets.drawnItems.Remove(schets.drawnItems[schets.drawnItems.Count - 1]);
+                this.RebuildBitmap(this, new EventArgs());
+            }
+        }
+
         public void VeranderKleurViaMenu(object obj, EventArgs ea)
         {
             ColorDialog kleurDialoog = new ColorDialog();
             DialogResult resultaat = kleurDialoog.ShowDialog();
-            if(resultaat == DialogResult.OK)
+            if (resultaat == DialogResult.OK)
             {
                 penkleur = kleurDialoog.Color;
             }
