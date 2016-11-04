@@ -21,9 +21,10 @@ namespace SchetsEditor.IO
             {
                 if (obj.elements[0] is Objects.Text)
                 {
-                    xml.Add(new XElement("TextObject", from el in obj.elements
+                    xml.Add(new XElement("TextObject",
+                                                       new XElement("Color", obj.color.ToArgb()),
+                                                       from el in obj.elements
                                                        select new XElement("TextElement", 
-                                                       new XElement("Color", obj.color.ToArgb()), 
                                                        new XElement("Elements",
                                                             new XElement("Type", el.GetType().ToString()),
                                                             new XElement("Text", ((Objects.Text)el).text),
@@ -34,15 +35,16 @@ namespace SchetsEditor.IO
                 }
                 else
                 {
-                    foreach (DrawnElement el in obj.elements)
-                    {
-                        xml.Add(new XElement("Object", new XElement("Color", obj.color.ToArgb()), new XElement("Elements",
-                            new XElement("Type", el.GetType().ToString()),
-                            new XElement("PointA", el.pointA),
-                            new XElement("PointB", el.pointB),
-                            new XElement("Thickness", el.LineThickness)
-                            )));
-                    }
+                    xml.Add(new XElement("Object",
+                                                new XElement("Color", obj.color.ToArgb()),
+                                                from el in obj.elements
+                                                select new XElement("Elements",
+                                                new XElement("Element",
+                                                    new XElement("Type", el.GetType().ToString()),
+                                                    new XElement("PointA", el.pointA),
+                                                    new XElement("PointB", el.pointB),
+                                                    new XElement("Thickness", el.LineThickness)
+                                                    ))));
                 }
             }
             xml.Save(path);
