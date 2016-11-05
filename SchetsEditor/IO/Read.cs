@@ -19,7 +19,6 @@ namespace SchetsEditor.IO
             ISchetsTool current;
             foreach (XElement o in xml.Descendants("Object"))
             {
-                sw.schetscontrol.penkleur = Color.FromArgb(int.Parse(o.Element("Color").Value));
                 switch (o.Element("Elements").Element("Type").Value)
                 {
                     case "SchetsEditor.FullRectangle":
@@ -41,11 +40,13 @@ namespace SchetsEditor.IO
                         current = current = (ISchetsTool)(new TweepuntTool<Line>());
                         break;
                 }
+                sw.schetscontrol.penkleur = Color.FromArgb(int.Parse(o.Element("Color").Value));
+                sw.schetscontrol.lijnDikte = int.Parse(o.Element("Elements").Element("Thickness").Value);
+                if (o.Descendants("Elements").Count() > 1) current = (ISchetsTool)new Pencil();
 
                 current.MuisVast(sw.schetscontrol, XElementToPoint(o.Element("Elements"), "PointA"));
                 foreach (XElement el in o.Descendants("Elements"))
                 {
-                    sw.schetscontrol.lijnDikte = int.Parse(el.Element("Thickness").Value);
                     current.MuisDrag(sw.schetscontrol, XElementToPoint(el, "PointB"));
                 }
                 current.MuisLos(sw.schetscontrol, XElementToPoint(o.Descendants("Elements").Last(), "PointB"));
