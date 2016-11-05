@@ -14,7 +14,7 @@ namespace SchetsEditor
         public SchetsControl schetscontrol;
         ISchetsTool huidigeTool;
         Panel paneel;
-        bool vast;
+        public bool vast;
         ResourceManager resourcemanager
             = new ResourceManager("SchetsEditor.Properties.Resources"
                                  , Assembly.GetExecutingAssembly()

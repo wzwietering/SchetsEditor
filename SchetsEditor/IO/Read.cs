@@ -20,39 +20,35 @@ namespace SchetsEditor.IO
             foreach (XElement o in xml.Descendants("Object"))
             {
                 sw.schetscontrol.penkleur = Color.FromArgb(int.Parse(o.Element("Color").Value));
+                switch (o.Element("Elements").Element("Type").Value)
+                {
+                    case "SchetsEditor.FullRectangle":
+                        current = (ISchetsTool)(new TweepuntTool<FullRectangle>());
+                        break;
+                    case "SchetsEditor.LineRectangle":
+                        current = (ISchetsTool)(new TweepuntTool<LineRectangle>());
+                        break;
+                    case "SchetsEditor.Line":
+                        current = (ISchetsTool)(new TweepuntTool<Line>());
+                        break;
+                    case "SchetsEditor.LineCircle":
+                        current = (ISchetsTool)(new TweepuntTool<LineCircle>());
+                        break;
+                    case "SchetsEditor.FullCircle":
+                        current = (ISchetsTool)(new TweepuntTool<FullCircle>());
+                        break;
+                    default:
+                        current = current = (ISchetsTool)(new TweepuntTool<Line>());
+                        break;
+                }
 
-                foreach(XElement el in o.Descendants("Elements"))
+                current.MuisVast(sw.schetscontrol, XElementToPoint(o.Element("Elements"), "PointA"));
+                foreach (XElement el in o.Descendants("Elements"))
                 {
                     sw.schetscontrol.lijnDikte = int.Parse(el.Element("Thickness").Value);
-                    switch (el.Element("Type").Value)
-                    {
-                        case "SchetsEditor.FullRectangle":
-                            current = (ISchetsTool)(new TweepuntTool<FullRectangle>());
-                            current.MuisVast(sw.schetscontrol, XElementToPoint(el, "PointA"));
-                            current.MuisLos(sw.schetscontrol, XElementToPoint(el, "PointB"));
-                            break;
-                        case "SchetsEditor.LineRectangle":
-                            current = (ISchetsTool)(new TweepuntTool<LineRectangle>());
-                            current.MuisVast(sw.schetscontrol, XElementToPoint(el, "PointA"));
-                            current.MuisLos(sw.schetscontrol, XElementToPoint(el, "PointB"));
-                            break;
-                        case "SchetsEditor.Line":
-                            current = (ISchetsTool)(new TweepuntTool<Line>());
-                            current.MuisVast(sw.schetscontrol, XElementToPoint(el, "PointA"));
-                            current.MuisLos(sw.schetscontrol, XElementToPoint(el, "PointB"));
-                            break;
-                        case "SchetsEditor.LineCircle":
-                            current = (ISchetsTool)(new TweepuntTool<LineCircle>());
-                            current.MuisVast(sw.schetscontrol, XElementToPoint(el, "PointA"));
-                            current.MuisLos(sw.schetscontrol, XElementToPoint(el, "PointB"));
-                            break;
-                        case "SchetsEditor.FullCircle":
-                            current = (ISchetsTool)(new TweepuntTool<FullCircle>());
-                            current.MuisVast(sw.schetscontrol, XElementToPoint(el, "PointA"));
-                            current.MuisLos(sw.schetscontrol, XElementToPoint(el, "PointB"));
-                            break;
-                    }
+                    current.MuisDrag(sw.schetscontrol, XElementToPoint(el, "PointB"));
                 }
+                current.MuisLos(sw.schetscontrol, XElementToPoint(o.Descendants("Elements").Last(), "PointB"));
             }
 
             ISchetsTool text;
@@ -63,11 +59,11 @@ namespace SchetsEditor.IO
                 text.MuisVast(sw.schetscontrol, XElementToPoint(to, "PointA"));
                 text.MuisLos(sw.schetscontrol, XElementToPoint(to, "PointB"));
 
-                foreach(var x in to.Elements("Text"))
+                foreach (var x in to.Elements("Text"))
                 {
                     text.Letter(sw.schetscontrol, x.Value.ToCharArray()[0]);
                 }
-                
+
                 text.Finalize(sw.schetscontrol);
             }
         }
