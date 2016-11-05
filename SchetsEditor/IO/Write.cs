@@ -23,12 +23,11 @@ namespace SchetsEditor.IO
                 {
                     xml.Add(new XElement("TextObject",
                                                        new XElement("Color", obj.color.ToArgb()),
+                                                       new XElement("PointA", obj.elements[0].pointA),
+                                                       new XElement("PointB", obj.elements[0].pointB),
                                                        from el in obj.elements
-                                                       select new XElement("TextElements", 
-                                                            new XElement("Text", ((Objects.Text)el).text),
-                                                            new XElement("PointA", el.pointA),
-                                                            new XElement("PointB", el.pointB)
-                                                            )));
+                                                       select new XElement("Text", ((Objects.Text)el).text)
+                                                            ));
                 }
                 else
                 {

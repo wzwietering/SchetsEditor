@@ -55,17 +55,19 @@ namespace SchetsEditor.IO
                 }
             }
 
-            foreach(XElement to in xml.Descendants("TextObject"))
+            ISchetsTool text;
+            foreach (XElement to in xml.Descendants("TextObject"))
             {
-                ISchetsTool text = new TekstTool();
+                text = new TekstTool();
                 sw.schetscontrol.penkleur = Color.FromArgb(int.Parse(to.Element("Color").Value));
+                text.MuisVast(sw.schetscontrol, XElementToPoint(to, "PointA"));
+                text.MuisLos(sw.schetscontrol, XElementToPoint(to, "PointB"));
 
-                foreach(XElement te in xml.Descendants("TextElements"))
+                foreach(var x in to.Elements("Text"))
                 {
-                    text.MuisVast(sw.schetscontrol, XElementToPoint(te, "PointA"));
-                    text.MuisLos(sw.schetscontrol, XElementToPoint(te, "PointB"));
-                    text.Letter(sw.schetscontrol, XElementToChar(te));
+                    text.Letter(sw.schetscontrol, x.Value.ToCharArray()[0]);
                 }
+                
                 text.Finalize(sw.schetscontrol);
             }
         }
@@ -81,16 +83,6 @@ namespace SchetsEditor.IO
             string[] xy = xe.Element(variable).Value.Split(',', '=', '}');
             Point p = new Point(int.Parse(xy[1]), int.Parse(xy[3]));
             return p;
-        }
-
-        /// <summary>
-        /// This method reads the char from the XElement 'Text'
-        /// </summary>
-        /// <param name="xe">The XElement to read</param>
-        /// <returns>The char which was read by the method</returns>
-        public char XElementToChar(XElement xe)
-        {
-            return xe.Element("Text").Value.ToCharArray()[0];
         }
     }
 }
