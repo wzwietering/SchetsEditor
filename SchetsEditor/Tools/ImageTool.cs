@@ -10,19 +10,27 @@ namespace SchetsEditor.Tools
     {
         public DrawingObjects.Image image;
         private Point point;
+        private Point pointb;
 
         public override void MuisVast(SchetsControl s, Point p)
         {
             point = p;
             base.MuisVast(s, p);
         }
+
+        public override void MuisLos(SchetsControl s, Point p)
+        {
+            pointb = p;
+            base.MuisLos(s, p);
+        }
         public override void MuisDrag(SchetsControl s, Point p) { }
 
         public void DrawImage(SchetsControl s, string location)
         {
             image = new DrawingObjects.Image();
-            image.pointA = point;
             image.image = new Bitmap(location);
+            image.pointA = point;
+            image.pointB = new Point(point.X + image.image.Width, point.Y + image.image.Height);
             image.path = location;
             Graphics g = s.MaakBitmapGraphics();
             image.Draw(g, kwast);

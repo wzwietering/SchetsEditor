@@ -33,6 +33,7 @@ namespace SchetsEditor.IO
                 {
                     xml.Add(new XElement("Image",
                                                        new XElement("PointA", obj.elements[0].pointA),
+                                                       new XElement("PointB", obj.elements[0].pointB),
                                                        new XElement("Path", ((DrawingObjects.Image)obj.elements[0]).path)
                                                             ));
                 }

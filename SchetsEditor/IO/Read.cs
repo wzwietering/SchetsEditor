@@ -74,6 +74,7 @@ namespace SchetsEditor.IO
             {
                 imagetool = new ImageTool();
                 imagetool.MuisVast(sw.schetscontrol, XElementToPoint(i, "PointA"));
+                imagetool.MuisLos(sw.schetscontrol, XElementToPoint(i, "PointB"));
                 imagetool.DrawImage(sw.schetscontrol, i.Element("Path").Value);
             }
         }
