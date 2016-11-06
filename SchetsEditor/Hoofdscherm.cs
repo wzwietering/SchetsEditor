@@ -1,4 +1,5 @@
 ﻿using SchetsEditor.IO;
+using SchetsEditor.Tools;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -29,6 +30,9 @@ namespace SchetsEditor
             menu.DropDownItems.Add(n);
             n = new ToolStripMenuItem("Open", null, this.Open);
             n.ShortcutKeys = Keys.Control | Keys.O;
+            menu.DropDownItems.Add(n);
+            n = new ToolStripMenuItem("Importeren", null, this.Import);
+            n.ShortcutKeys = Keys.Control | Keys.I;
             menu.DropDownItems.Add(n);
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
@@ -67,7 +71,7 @@ namespace SchetsEditor
         private void Open(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            ofd.Title = "Choose the file to open";
+            ofd.Title = "Kies een bestand om te openen";
             ofd.Filter = "XML|*.xml";
             if (ofd.ShowDialog() == DialogResult.OK)
             {
@@ -76,6 +80,22 @@ namespace SchetsEditor
 
                 Read read = new Read();
                 read.ReadXML(ofd.FileName, s);
+
+                s.Show();
+            }
+        }
+
+        private void Import(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Kies een bestand om te openen";
+            ofd.Filter = "PNG|*.png|JPEG|*.jpg|Bitmap Image|*.bmp|GIF|*.gif";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                SchetsWin s = new SchetsWin();
+                s.MdiParent = this;
+                ImageTool i = new ImageTool();
+                i.DrawImage(s.schetscontrol, ofd.FileName);
 
                 s.Show();
             }
