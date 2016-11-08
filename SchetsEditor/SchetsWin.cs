@@ -19,6 +19,7 @@ namespace SchetsEditor
             = new ResourceManager("SchetsEditor.Properties.Resources"
                                  , Assembly.GetExecutingAssembly()
                                  );
+        bool unsavedChanges = true;
 
         private void veranderAfmeting(object o, EventArgs ea)
         {
@@ -41,9 +42,21 @@ namespace SchetsEditor
             this.huidigeTool = (ISchetsTool)((RadioButton)obj).Tag;
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (unsavedChanges)
+            {
+                if (MessageBox.Show("Er zijn onopgeslagen veranderingen, weet u zeker dat u de tekening wilt sluiten?", "Bevestiging", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+            base.OnFormClosing(e);
+        }
+
         private void afsluiten(object obj, EventArgs ea)
         {
-            this.Close();
+            OnFormClosing(new FormClosingEventArgs(CloseReason.UserClosing, false));
         }
 
         private void Export(object obj, EventArgs ea)
@@ -53,12 +66,13 @@ namespace SchetsEditor
 
         private void Undo(object obj, EventArgs ea)
         {
+            unsavedChanges = true;
             schetscontrol.Undo();
-            
         }
 
         private void Redo(object obj, EventArgs ea)
         {
+            unsavedChanges = true;
             schetscontrol.Redo();
         }
 
@@ -72,6 +86,7 @@ namespace SchetsEditor
             if (sfd.ShowDialog() == DialogResult.OK)
             {
                 huidigeTool.Finalize(schetscontrol);
+                unsavedChanges = false;
                 Write write = new Write();
                 write.WriteXML(sfd.FileName, schetscontrol.Schets.drawnItems);
             }
@@ -89,6 +104,7 @@ namespace SchetsEditor
             schetscontrol.MouseDown += (object o, MouseEventArgs mea) =>
                                        {
                                            vast = true;
+                                           unsavedChanges = true;
                                            huidigeTool.MuisVast(schetscontrol, mea.Location);
                                        };
             schetscontrol.MouseMove += (object o, MouseEventArgs mea) =>
@@ -99,11 +115,15 @@ namespace SchetsEditor
             schetscontrol.MouseUp += (object o, MouseEventArgs mea) =>
                                      {
                                          if (vast)
+                                         {
                                              huidigeTool.MuisLos(schetscontrol, mea.Location);
+                                             unsavedChanges = true;
+                                         }
                                          vast = false;
                                      };
             schetscontrol.KeyPress += (object o, KeyPressEventArgs kpea) =>
                                       {
+                                          unsavedChanges = true;
                                           huidigeTool.Letter(schetscontrol, kpea.KeyChar);
                                       };
             this.Controls.Add(schetscontrol);

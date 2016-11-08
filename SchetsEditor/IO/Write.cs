@@ -29,6 +29,14 @@ namespace SchetsEditor.IO
                                                        select new XElement("Text", ((Objects.Text)el).text)
                                                             ));
                 }
+                else if (obj.elements[0] is DrawingObjects.Image)
+                {
+                    xml.Add(new XElement("Image",
+                                                       new XElement("PointA", obj.elements[0].pointA),
+                                                       new XElement("PointB", obj.elements[0].pointB),
+                                                       new XElement("Path", ((DrawingObjects.Image)obj.elements[0]).path)
+                                                            ));
+                }
                 else
                 {
                     xml.Add(new XElement("Object",

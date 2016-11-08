@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchetsEditor.Tools;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -66,6 +67,15 @@ namespace SchetsEditor.IO
                 }
 
                 text.Finalize(sw.schetscontrol);
+            }
+
+            ImageTool imagetool;
+            foreach(XElement i in xml.Descendants("Image"))
+            {
+                imagetool = new ImageTool();
+                imagetool.MuisVast(sw.schetscontrol, XElementToPoint(i, "PointA"));
+                imagetool.MuisLos(sw.schetscontrol, XElementToPoint(i, "PointB"));
+                imagetool.DrawImage(sw.schetscontrol, i.Element("Path").Value);
             }
         }
 

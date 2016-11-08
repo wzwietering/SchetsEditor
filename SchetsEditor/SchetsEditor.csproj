@@ -62,6 +62,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DrawingObjects\Image.cs" />
     <Compile Include="DrawingObjects\UndoItem.cs" />
     <Compile Include="helper.cs" />
     <Compile Include="IO\Write.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="SchetsWin.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Tools\ImageTool.cs" />
     <Compile Include="Tools\ISchetsTool.cs" />
     <Compile Include="Tools\StartpuntTool.cs" />
     <Compile Include="Tools\TekstTool.cs" />

@@ -12,7 +12,7 @@ namespace SchetsEditor
         internal List<DrawnItem> drawnItems = new List<DrawnItem>();
         internal Stack<UndoItem> undoStack = new Stack<UndoItem>();
 
-        private Bitmap bitmap;
+        public Bitmap bitmap;
 
         public Schets()
         {
@@ -50,9 +50,9 @@ namespace SchetsEditor
         public void Export()
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Title = "Save Image";
+            sfd.Title = "Afbeelding opslaan";
             sfd.Filter = "PNG|*.png|JPEG|*.jpg|Bitmap Image|*.bmp|GIF|*.gif";
-            sfd.FileName = "New image";
+            sfd.FileName = "Nieuwe tekening";
 
             if(sfd.ShowDialog() == DialogResult.OK)
             {
