@@ -1,6 +1,6 @@
 ﻿Cirkels tekenen:
-1. CirkelTool en VolCirkelTool klassen toegevoegd aan tools.cs
-2. Recourses voor cirkel en volcirkel toegevoegd
+1. CirkelTool en VolCirkelTool klassen toegevoegd aan tools.cs.
+2. Resources voor cirkel en volcirkel toegevoegd.
 
 Het nieuwe gummen:
 1.  In de map Objects zitten nu alle vormen die je kunt tekenen. Deze zijn allemaal een subclass van DrawnElement, die een Draw() en een WasClicked() method heeft.
@@ -34,7 +34,7 @@ Colorpicker:
 2. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.
 
 Lijndikte:
-1. Lijnen hebben een instelbare dikte
+1. Lijnen hebben een instelbare dikte.
 2. In de userinterface is er een slider en een label om dit aan te geven.
 
 Bitmap resize:

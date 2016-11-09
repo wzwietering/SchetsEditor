@@ -141,9 +141,7 @@ namespace SchetsEditor
                                     };
 
             this.ClientSize = new Size(700, 600);
-
             this.WindowState = FormWindowState.Maximized;
-
             huidigeTool = deTools[0];
 
             schetscontrol = new SchetsControl();

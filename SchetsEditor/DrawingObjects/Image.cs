@@ -8,12 +8,12 @@ namespace SchetsEditor.DrawingObjects
 {
     class Image : DrawnElement
     {
-        public Bitmap image;
+        public Bitmap bitmap;
         public string path;
 
         public override void Draw(Graphics g, Brush b)
         {
-            g.DrawImage(image, this.pointA);
+            g.DrawImage(bitmap, this.pointA);
         }
 
         public override bool WasClicked(Point p)
