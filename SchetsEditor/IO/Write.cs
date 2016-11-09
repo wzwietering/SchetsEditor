@@ -14,9 +14,11 @@ namespace SchetsEditor.IO
         /// </summary>
         /// <param name="path">De plek om de XML op te slaan</param>
         /// <param name="items">De elementen die opgeslagen moeten worden</param>
-        public void WriteXML(string path, List<DrawnItem> items)
+        public void WriteXML(string path, Schets schets)
         {
+            List<DrawnItem> items = schets.drawnItems;
             XElement xml = new XElement("Items");
+            xml.Add(new XElement("Background", schets.background.Color.ToArgb()));
             foreach (DrawnItem obj in items)
             {
                 //Tekst wordt anders opgeslagen dan andere objecten om ruimte te besparen
