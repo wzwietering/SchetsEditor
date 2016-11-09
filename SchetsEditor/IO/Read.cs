@@ -1,50 +1,95 @@
-﻿using System.IO;
+﻿using SchetsEditor.Tools;
+using System;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace SchetsEditor.IO
 {
     class Read
     {
         /// <summary>
-        /// Reads a CSV file
+        /// Reads a saved XML and converts it to a drawing
         /// </summary>
-        /// <param name="path">The location of the file to read</param>
-        public void ReadCSV(string path)
+        /// <param name="path">The location of the XML on the disk</param>
+        /// <param name="sw">The schetswin to draw on</param>
+        public void ReadXML(string path, SchetsWin sw)
         {
-            StreamReader sr = new StreamReader(path);
-            string line;
-            while ((line = sr.ReadLine()) != null)
+            XDocument xml = XDocument.Load(path);
+            ISchetsTool current;
+            foreach (XElement o in xml.Descendants("Object"))
             {
-                //Commas can be escaped in the file using '\'.  It is replaced by a '#' to correct this later on
-                char[] c = line.ToCharArray();
-                for(int a = 0; a < c.Length - 1; a++)
+                switch (o.Element("Elements").Element("Type").Value)
                 {
-                    if (c[a] == '\\') c[a + 1] = '#';
+                    case "SchetsEditor.FullRectangle":
+                        current = (ISchetsTool)(new TweepuntTool<FullRectangle>());
+                        break;
+                    case "SchetsEditor.LineRectangle":
+                        current = (ISchetsTool)(new TweepuntTool<LineRectangle>());
+                        break;
+                    case "SchetsEditor.Line":
+                        current = (ISchetsTool)(new TweepuntTool<Line>());
+                        break;
+                    case "SchetsEditor.LineCircle":
+                        current = (ISchetsTool)(new TweepuntTool<LineCircle>());
+                        break;
+                    case "SchetsEditor.FullCircle":
+                        current = (ISchetsTool)(new TweepuntTool<FullCircle>());
+                        break;
+                    default:
+                        current = current = (ISchetsTool)(new TweepuntTool<Line>());
+                        break;
                 }
-                line = new string(c);
+                sw.schetscontrol.penkleur = Color.FromArgb(int.Parse(o.Element("Color").Value));
+                sw.schetscontrol.lijnDikte = int.Parse(o.Element("Elements").Element("Thickness").Value);
+                if (o.Descendants("Elements").Count() > 1) current = (ISchetsTool)new Pencil();
 
-                string[] variables = line.Split(',');
-                for(int i = 0; i < variables.Length; i++)
+                current.MuisVast(sw.schetscontrol, XElementToPoint(o.Element("Elements"), "PointA"));
+                foreach (XElement el in o.Descendants("Elements"))
                 {
-                    c = variables[i].ToCharArray();
-
-                    //Remove escape characters
-                    char backslash = '\\';
-                    c = c.Where(j => j != backslash).ToArray();
-
-                    //Replace escaped commas with a comma
-                    for (int b = 0; b < c.Length; b++)
-                    {
-                        if(c[b] == '#')
-                        {
-                            c[b] = ',';
-                        }
-                    }
-                    variables[i] = new string(c);
-                    System.Diagnostics.Debug.WriteLine(variables[i]);
+                    current.MuisDrag(sw.schetscontrol, XElementToPoint(el, "PointB"));
                 }
+                current.MuisLos(sw.schetscontrol, XElementToPoint(o.Descendants("Elements").Last(), "PointB"));
             }
-            sr.Close();
+
+            ISchetsTool text;
+            foreach (XElement to in xml.Descendants("TextObject"))
+            {
+                text = new TekstTool();
+                sw.schetscontrol.penkleur = Color.FromArgb(int.Parse(to.Element("Color").Value));
+                text.MuisVast(sw.schetscontrol, XElementToPoint(to, "PointA"));
+                text.MuisLos(sw.schetscontrol, XElementToPoint(to, "PointB"));
+
+                foreach (var x in to.Elements("Text"))
+                {
+                    text.Letter(sw.schetscontrol, x.Value.ToCharArray()[0]);
+                }
+
+                text.Finalize(sw.schetscontrol);
+            }
+
+            ImageTool imagetool;
+            foreach(XElement i in xml.Descendants("Image"))
+            {
+                imagetool = new ImageTool();
+                imagetool.MuisVast(sw.schetscontrol, XElementToPoint(i, "PointA"));
+                imagetool.MuisLos(sw.schetscontrol, XElementToPoint(i, "PointB"));
+                imagetool.DrawImage(sw.schetscontrol, i.Element("Path").Value);
+            }
+        }
+
+        /// <summary>
+        /// This method gets the saved coordinates from an XElement and makes a point from them
+        /// </summary>
+        /// <param name="xe">The XElement to read</param>
+        /// <param name="variable">The name of the variable to make a point from</param>
+        /// <returns>A new point made from the coordinates in the XElement</returns>
+        public Point XElementToPoint(XElement xe, string variable)
+        {
+            string[] xy = xe.Element(variable).Value.Split(',', '=', '}');
+            Point p = new Point(int.Parse(xy[1]), int.Parse(xy[3]));
+            return p;
         }
     }
 }

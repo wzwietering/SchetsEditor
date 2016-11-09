@@ -11,7 +11,7 @@ namespace SchetsEditor
     public class SchetsWin : Form
     {
         MenuStrip menuStrip;
-        SchetsControl schetscontrol;
+        public SchetsControl schetscontrol;
         ISchetsTool huidigeTool;
         Panel paneel;
         bool vast;
@@ -19,6 +19,7 @@ namespace SchetsEditor
             = new ResourceManager("SchetsEditor.Properties.Resources"
                                  , Assembly.GetExecutingAssembly()
                                  );
+        bool unsavedChanges = false;
 
         private void veranderAfmeting(object o, EventArgs ea)
         {
@@ -41,9 +42,21 @@ namespace SchetsEditor
             this.huidigeTool = (ISchetsTool)((RadioButton)obj).Tag;
         }
 
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (unsavedChanges)
+            {
+                if (MessageBox.Show("Er zijn onopgeslagen veranderingen, weet u zeker dat u de tekening wilt sluiten?", "Bevestiging", MessageBoxButtons.YesNo) == DialogResult.No)
+                {
+                    e.Cancel = true;
+                }
+            }
+            base.OnFormClosing(e);
+        }
+
         private void afsluiten(object obj, EventArgs ea)
         {
-            this.Close();
+            OnFormClosing(new FormClosingEventArgs(CloseReason.UserClosing, false));
         }
 
         private void Export(object obj, EventArgs ea)
@@ -53,12 +66,13 @@ namespace SchetsEditor
 
         private void Undo(object obj, EventArgs ea)
         {
+            unsavedChanges = true;
             schetscontrol.Undo();
-            
         }
 
         private void Redo(object obj, EventArgs ea)
         {
+            unsavedChanges = true;
             schetscontrol.Redo();
         }
 
@@ -71,6 +85,8 @@ namespace SchetsEditor
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
+                huidigeTool.Finalize(schetscontrol);
+                unsavedChanges = false;
                 Write write = new Write();
                 write.WriteXML(sfd.FileName, schetscontrol.Schets.drawnItems);
             }
@@ -101,6 +117,7 @@ namespace SchetsEditor
             schetscontrol.MouseDown += (object o, MouseEventArgs mea) =>
                                        {
                                            vast = true;
+                                           unsavedChanges = true;
                                            huidigeTool.MuisVast(schetscontrol, mea.Location);
                                        };
             schetscontrol.MouseMove += (object o, MouseEventArgs mea) =>
@@ -111,11 +128,15 @@ namespace SchetsEditor
             schetscontrol.MouseUp += (object o, MouseEventArgs mea) =>
                                      {
                                          if (vast)
+                                         {
                                              huidigeTool.MuisLos(schetscontrol, mea.Location);
+                                             unsavedChanges = true;
+                                         }
                                          vast = false;
                                      };
             schetscontrol.KeyPress += (object o, KeyPressEventArgs kpea) =>
                                       {
+                                          unsavedChanges = true;
                                           huidigeTool.Letter(schetscontrol, kpea.KeyChar);
                                       };
             this.Controls.Add(schetscontrol);
@@ -200,7 +221,7 @@ namespace SchetsEditor
         private void maakAktieButtons()
         {
             paneel = new Panel();
-            paneel.Size = new Size(600, 30);
+            paneel.Size = new Size(640, 30);
             this.Controls.Add(paneel);
 
             Button b = new Button();
@@ -244,6 +265,36 @@ namespace SchetsEditor
             b.Location = new Point(380, 0);
             b.Click += schetscontrol.RebuildBitmap;
             paneel.Controls.Add(b);
+
+            b = new Button();
+            b.Text = "Undo";
+            b.Location = new Point(460, 0);
+            b.Click += this.Undo;
+            paneel.Controls.Add(b);
+
+            b = new Button();
+            b.Text = "Redo";
+            b.Location = new Point(540, 0);
+            b.Click += this.Redo;
+            paneel.Controls.Add(b);
+        }
+
+        /// <summary>
+        /// Gives a list of all available tools
+        /// </summary>
+        /// <returns>The list of tools</returns>
+        public ISchetsTool[] GetTools()
+        {
+            ISchetsTool[] tools = {   new TweepuntTool<Line>()
+                                    , new Pencil()
+                                    , new TweepuntTool<FullRectangle>()
+                                    , new TweepuntTool<LineRectangle>()
+                                    , new TweepuntTool<FullCircle>()
+                                    , new TweepuntTool<LineCircle>()
+                                    , new TekstTool()
+                                    , new GumTool()
+                                    };
+            return tools;
         }
     }
 }
