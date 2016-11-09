@@ -1,11 +1,9 @@
-﻿using SchetsEditor.Objects;
-using System;
-using System.Drawing;
-using System.Linq;
+﻿using System.Drawing;
 
 namespace SchetsEditor
 {
-    public abstract class StartpuntTool : ISchetsTool
+    // On dimensional tool has a starting point and that's it.
+    public abstract class OneDimensionalTool : ISchetsTool
     {
         protected Brush kwast;
 

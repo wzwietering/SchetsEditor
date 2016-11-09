@@ -10,7 +10,7 @@ namespace SchetsEditor
     public class Schets
     {
         internal List<DrawnItem> drawnItems = new List<DrawnItem>();
-        internal Stack<UndoItem> undoStack = new Stack<UndoItem>();
+        internal Stack<DrawnItem> undoStack = new Stack<DrawnItem>();
 
         public Bitmap bitmap;
 

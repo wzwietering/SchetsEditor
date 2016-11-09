@@ -39,5 +39,14 @@ Lijndikte:
 Bitmap resize:
 1. Bitmap wordt opnieuw gemaakt als het window geresized wordt, zodat hij de afmetingen van het window heeft.
 
+Undo/Redo: 
+		(er is gekozen voor een simpele undo/redo logic. Voor een betere implementatie zou het command pattern gebruikt kunnen worden maar daarvoor
+		moet het halve programma omgeschreven worden en gekozen is om onze tijd in plaats daarvan te besteden aan extra functionaliteit.)
+1. Undostack toegevoegd aan Schets om items uit de drawnItems op de pushen en weer af te halen.
+2. Undo() en Redo() methods toegevoegd aan de schetscontrol. Deze halen simpelweg het laatste element uit drawnItems en gooien het op de undostack, en andersom.
+
+op/neer:
+1. SortTool toegevoegd die elementen boven en onder elkaar kan plaatsen. 
+
 Overig:
 1. Een nieuwe afbeelding kan nu met een keyboard shortcut geopend worden.

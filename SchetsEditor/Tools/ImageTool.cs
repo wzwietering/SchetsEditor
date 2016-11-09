@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SchetsEditor.Tools
 {
-    class ImageTool : StartpuntTool
+    class ImageTool : OneDimensionalTool
     {
         public DrawingObjects.Image image;
         private Point point;

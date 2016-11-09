@@ -94,12 +94,12 @@ namespace SchetsEditor
 
         public SchetsWin()
         {
-            ISchetsTool[] deTools = { new TweepuntTool<Line>()
-                                    , new Pencil()
-                                    , new TweepuntTool<FullRectangle>()
-                                    , new TweepuntTool<LineRectangle>()
-                                    , new TweepuntTool<FullCircle>()
-                                    , new TweepuntTool<LineCircle>()
+            ISchetsTool[] deTools = { new TwoDimensionalTool<Line>()
+                                    , new PencilTool()
+                                    , new TwoDimensionalTool<FullRectangle>()
+                                    , new TwoDimensionalTool<LineRectangle>()
+                                    , new TwoDimensionalTool<FullCircle>()
+                                    , new TwoDimensionalTool<LineCircle>()
                                     , new TekstTool()
                                     , new GumTool()
                                     , new SortTool() {directionUp = true }
@@ -277,24 +277,6 @@ namespace SchetsEditor
             b.Location = new Point(540, 0);
             b.Click += this.Redo;
             paneel.Controls.Add(b);
-        }
-
-        /// <summary>
-        /// Gives a list of all available tools
-        /// </summary>
-        /// <returns>The list of tools</returns>
-        public ISchetsTool[] GetTools()
-        {
-            ISchetsTool[] tools = {   new TweepuntTool<Line>()
-                                    , new Pencil()
-                                    , new TweepuntTool<FullRectangle>()
-                                    , new TweepuntTool<LineRectangle>()
-                                    , new TweepuntTool<FullCircle>()
-                                    , new TweepuntTool<LineCircle>()
-                                    , new TekstTool()
-                                    , new GumTool()
-                                    };
-            return tools;
         }
     }
 }

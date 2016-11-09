@@ -5,7 +5,10 @@ using System.Linq;
 
 namespace SchetsEditor
 {
-    public class TweepuntTool<T> : StartpuntTool where T : DrawnElement
+    // Twodimensional tool has a start and end point. It can be of various types like circle, rectangle etc.
+    // It can make one element that will be added to a drawnItem, which will be added to the sketch (on Finalize())
+    // This is unlike (for example) a text tool, where multiple elements are added to a drawnItem (one for each typed letter).
+    public class TwoDimensionalTool<T> : OneDimensionalTool where T : DrawnElement
     {
         public T element;
 

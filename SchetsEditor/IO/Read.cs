@@ -23,27 +23,27 @@ namespace SchetsEditor.IO
                 switch (o.Element("Elements").Element("Type").Value)
                 {
                     case "SchetsEditor.FullRectangle":
-                        current = (ISchetsTool)(new TweepuntTool<FullRectangle>());
+                        current = (ISchetsTool)(new TwoDimensionalTool<FullRectangle>());
                         break;
                     case "SchetsEditor.LineRectangle":
-                        current = (ISchetsTool)(new TweepuntTool<LineRectangle>());
+                        current = (ISchetsTool)(new TwoDimensionalTool<LineRectangle>());
                         break;
                     case "SchetsEditor.Line":
-                        current = (ISchetsTool)(new TweepuntTool<Line>());
+                        current = (ISchetsTool)(new TwoDimensionalTool<Line>());
                         break;
                     case "SchetsEditor.LineCircle":
-                        current = (ISchetsTool)(new TweepuntTool<LineCircle>());
+                        current = (ISchetsTool)(new TwoDimensionalTool<LineCircle>());
                         break;
                     case "SchetsEditor.FullCircle":
-                        current = (ISchetsTool)(new TweepuntTool<FullCircle>());
+                        current = (ISchetsTool)(new TwoDimensionalTool<FullCircle>());
                         break;
                     default:
-                        current = current = (ISchetsTool)(new TweepuntTool<Line>());
+                        current = current = (ISchetsTool)(new TwoDimensionalTool<Line>());
                         break;
                 }
                 sw.schetscontrol.penkleur = Color.FromArgb(int.Parse(o.Element("Color").Value));
                 sw.schetscontrol.lijnDikte = int.Parse(o.Element("Elements").Element("Thickness").Value);
-                if (o.Descendants("Elements").Count() > 1) current = (ISchetsTool)new Pencil();
+                if (o.Descendants("Elements").Count() > 1) current = (ISchetsTool)new PencilTool();
 
                 current.MuisVast(sw.schetscontrol, XElementToPoint(o.Element("Elements"), "PointA"));
                 foreach (XElement el in o.Descendants("Elements"))

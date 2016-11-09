@@ -70,8 +70,8 @@ namespace SchetsEditor
         {
             if (schets.undoStack.Count > 0)
             {
-                UndoItem item = schets.undoStack.Pop();
-                schets.drawnItems.Insert(item.index, item.item);
+                DrawnItem item = schets.undoStack.Pop();
+                schets.drawnItems.Add(item);
                 this.RebuildBitmap(this, new EventArgs());
             }
         }
@@ -80,12 +80,7 @@ namespace SchetsEditor
         {
             if (schets.drawnItems.Count > 0)
             {
-                var item = new UndoItem()
-                {
-                    item = schets.drawnItems[schets.drawnItems.Count - 1],
-                    index = schets.drawnItems.Count - 1,
-                };
-                schets.undoStack.Push(item);
+                schets.undoStack.Push(schets.drawnItems[schets.drawnItems.Count - 1]);
                 schets.drawnItems.Remove(schets.drawnItems[schets.drawnItems.Count - 1]);
                 this.RebuildBitmap(this, new EventArgs());
             }

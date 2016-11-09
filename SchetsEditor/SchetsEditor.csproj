@@ -63,7 +63,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DrawingObjects\Image.cs" />
-    <Compile Include="DrawingObjects\UndoItem.cs" />
     <Compile Include="helper.cs" />
     <Compile Include="IO\Write.cs" />
     <Compile Include="DrawingObjects\DrawnElement.cs" />
@@ -92,11 +91,11 @@
     <Compile Include="Tools\SortTool.cs" />
     <Compile Include="Tools\ImageTool.cs" />
     <Compile Include="Tools\ISchetsTool.cs" />
-    <Compile Include="Tools\StartpuntTool.cs" />
+    <Compile Include="Tools\OneDimensionalTool.cs" />
     <Compile Include="Tools\TekstTool.cs" />
     <Compile Include="Tools\GumTool.cs" />
-    <Compile Include="Tools\Pencil.cs" />
-    <Compile Include="Tools\TweepuntTool.cs" />
+    <Compile Include="Tools\PencilTool.cs" />
+    <Compile Include="Tools\TwoDimensionalTool.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx" />

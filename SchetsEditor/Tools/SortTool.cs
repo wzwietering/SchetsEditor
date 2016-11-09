@@ -5,7 +5,7 @@ using System.Linq;
 namespace SchetsEditor
 {
     // Tool to move drawn items up and down in the list of drawn items, to move them on top of or underneath other items.
-    public class SortTool : StartpuntTool
+    public class SortTool : OneDimensionalTool
     {
         // Determines whether this tool moves drawn items up (if true) or down (if false)
         public bool directionUp;
