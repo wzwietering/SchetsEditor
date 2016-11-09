@@ -7,7 +7,7 @@ namespace SchetsEditor
     // With this tool you can select an element by clicking on it.
     public class SelectorTool : OneDimensionalTool
     {
-        public override string ToString() { return "gum"; }
+        public override string ToString() { return "select"; }
 
         // The item that was clicked
         internal DrawnItem selectedItem;
