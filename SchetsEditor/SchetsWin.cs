@@ -120,7 +120,7 @@ namespace SchetsEditor
                 huidigeTool.Finalize(schetscontrol);
                 unsavedChanges = false;
                 Write write = new Write();
-                write.WriteXML(sfd.FileName, schetscontrol.Schets.drawnItems);
+                write.WriteXML(sfd.FileName, schetscontrol.Schets);
             }
         }
 

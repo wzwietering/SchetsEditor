@@ -13,7 +13,7 @@ namespace SchetsEditor
         internal Stack<DrawnItem> undoStack = new Stack<DrawnItem>();
 
         public Bitmap bitmap;
-        public Brush background = Brushes.White;
+        public SolidBrush background = (SolidBrush)Brushes.White;
 
         public Schets()
         {

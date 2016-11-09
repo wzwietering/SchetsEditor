@@ -18,6 +18,9 @@ namespace SchetsEditor.IO
         {
             XDocument xml = XDocument.Load(path);
             ISchetsTool current;
+            sw.schetscontrol.Schets.background = new SolidBrush(Color.FromArgb(int.Parse(xml.Descendants("Background").First().Value)));
+            sw.schetscontrol.Schets.Schoon();
+            sw.schetscontrol.RebuildBitmap(this, new EventArgs());
             foreach (XElement o in xml.Descendants("Object"))
             {
                 switch (o.Element("Elements").Element("Type").Value)
