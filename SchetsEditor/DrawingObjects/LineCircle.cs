@@ -14,7 +14,7 @@ namespace SchetsEditor
 
         public override bool WasClicked(Point p)
         {
-            return Helper.EllipseClicked(pointA, pointB, p, LineThickness) && !Helper.EllipseClicked(pointA, pointB, p, -LineThickness); 
+            return Helper.EllipseClicked(pointA, pointB, p, LineThickness + 2) && !Helper.EllipseClicked(pointA, pointB, p, -(LineThickness + 2)); 
         }
     }
 }

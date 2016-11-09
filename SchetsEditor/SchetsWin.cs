@@ -78,10 +78,7 @@ namespace SchetsEditor
 
         public SchetsWin()
         {
-            ISchetsTool[] deTools = {// new PenTool()
-                                     //  , new LijnTool()
-                                     //, 
-                                      new TweepuntTool<Line>()
+            ISchetsTool[] deTools = { new TweepuntTool<Line>()
                                     , new Pencil()
                                     , new TweepuntTool<FullRectangle>()
                                     , new TweepuntTool<LineRectangle>()
@@ -89,9 +86,14 @@ namespace SchetsEditor
                                     , new TweepuntTool<LineCircle>()
                                     , new TekstTool()
                                     , new GumTool()
+                                    , new SortTool() {directionUp = true }
+                                    , new SortTool() {directionUp = false }
                                     };
 
-            this.ClientSize = new Size(700, 500);
+            this.ClientSize = new Size(700, 600);
+
+            this.WindowState = FormWindowState.Maximized;
+
             huidigeTool = deTools[0];
 
             schetscontrol = new SchetsControl();
