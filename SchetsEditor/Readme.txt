@@ -1,0 +1,66 @@
+Cirkels tekenen:
+1. CirkelTool en VolCirkelTool klassen toegevoegd aan tools.cs.
+2. Resources voor cirkel en volcirkel toegevoegd.
+
+Het nieuwe gummen:
+1.  In de schets zit een lijst DrawnItems waarin bijgehouden wordt wat er getekend is.
+2.  In de map Objects zitten nu alle vormen die je kunt tekenen. Deze zijn allemaal een subclass van DrawnElement, die een Draw() en een WasClicked() method heeft.
+	Dit is gedaan omdat:
+	-	Er sowieso een datastructuur bijgehouden moest worden vanwege het nieuwe gummen. 
+	-	Door van elk type 'tekening' een andere klasse te maken, kunnen deze klassen meteen gebruikt worden om voor elk type een andere implementatie van WasClicked() te
+		maken. Elk type heeft immers een andere berekening nodig om te kijken of er op geklikt is.
+	-	Doordat elk object een eigen Draw() implementatie heeft kan bij het opnieuw tekenen van de bitmap door de lijst met items geitereerd worden, waarbij elk element
+		zichzelf tekent.
+3.  De tweepunt tool heet nu TwoDimensionalTool en heeft nu een Type parameter, welke een DrawnElement moet zijn. De tweepunttool tekent dus zelf niks meer. 
+	Hij maakt elementen, die zichzelf tekenen. Dit is gedaan vanwege de volgende redenen:
+	-   er moest sowieso een lijst met elementen bijgehouden worden (t.b.v. het nieuwe gummen), dus we gebruik konden maken van die bestaande elementen om ook zichzelf
+        te laten tekenen. Zo doet een tool één ding: het maakt een element. Anders zouden de tools naast het tekenen ook ineens een datastructuur van elementen moeten
+	    gaan onderhouden. 
+	-   De tools waren ingewikkeld geïmplementeerd. Het was een enorm overervingsfeestje wat niet voor duidelijkheid zorgde (alle methodes leken overal van alles aan te roepen)
+	    Met de nieuwe implementatie is er een tool die de events afvangt, en het tekenen gebeurt ergens anders. Seperation of concerns.
+4.	De TwoDimensionalTool maakt een drawnItem, die weer een lijst van DrawnElements bevat. Bij cirkels, vierkanten en een lijn zal deze lijst altijd een element bevatten. 
+	Echter bij tekst en de pen, worden vele elementen toegevoegd (bijvoorbeeld bij tekst voor elke letter een element). Door deze te groeperen in DrawnItems kunnen
+	tekstblokken in een keer gewist worden.
+	De tool voegt op Finalize() het drawnItem toe aan de schets.
+5.	Reset() method is toegevoegd aan de tool. Dit is ten behoeve van het groeperen van tekst elementen in een drawnItem. 
+
+Selectortool:
+De selector tool is een base class voor de gum tool, bucket tool en sort tool. De selector tool heeft een implementatie van MuisLos() die een element selecteert waarop
+was geklikt.
+
+Bucket tool:
+De bucket tool kan je gebruiken om een element van kleur te veranderen.
+
+Sort Tool:
+SortTool toegevoegd die elementen boven en onder elkaar kan plaatsen. 
+
+Bestanden:
+1. Schets heeft een 'Export' methode gekregen om een file op te slaan als afbeelding.
+2. Hoofdscherm heeft een 'Exporteren' knop gekregen in het menu.
+3. Er is een 'Read' klasse die XML files kan lezen toegevoegd.
+4. De 'Write' klasse schrijft de objecten en hun variabelen naar een XML.
+5. Via 'Importeren' in het hoofdscherm kan een afbeelding geladen worden met de 'Import' methode.
+6. De ImageTool en de Image klasse zijn verantwoordelijk voor het tekenen van een afbeelding.
+
+Colorpicker:
+1. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
+2. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.
+
+Lijndikte:
+1. Lijnen hebben een instelbare dikte.
+2. In de userinterface is er een slider en een label om dit aan te geven.
+
+Bitmap resize:
+1. Bitmap wordt opnieuw gemaakt als het window geresized wordt, zodat hij de afmetingen van het window heeft. Gekozen is om niet alle losse elementen mee te schalen.
+	Dan zou namelijk ineens je hele tekening vergroten of verkleinen, alleen maar omdat je bijvoorbeeld per ongeluk je window fullscreen maakt. Dit is niet 
+	gebruiksvriendelijk (denk bijvoorbeeld aan paint, daar werkt dat ook niet zo).
+	
+Undo/Redo: 
+		(er is gekozen voor een simpele undo/redo logic. Voor een betere implementatie zou het command pattern gebruikt kunnen worden maar daarvoor
+		moet het halve programma omgeschreven worden en gekozen is om onze tijd in plaats daarvan te besteden aan extra functionaliteit.)
+1. Undostack toegevoegd aan Schets om items uit de drawnItems op de pushen en weer af te halen.
+2. Undo() en Redo() methods toegevoegd aan de schetscontrol. Deze halen simpelweg het laatste element uit drawnItems en gooien het op de undostack, en andersom.
+
+Overig:
+1. Een nieuwe afbeelding kan nu met een keyboard shortcut geopend worden.
+2. De 'VeranderKleur' en de 'VeranderKleurViaMenu' methodes zijn samengevoegd tot één methode genaamd 'VeranderKleur'.

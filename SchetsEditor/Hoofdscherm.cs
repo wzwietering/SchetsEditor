@@ -30,14 +30,14 @@ namespace SchetsEditor
         private void maakFileMenu()
         {
             ToolStripDropDownItem menu;
-            menu = new ToolStripMenuItem("File");
+            menu = new ToolStripMenuItem("Bestand");
             ToolStripMenuItem n = new ToolStripMenuItem("Nieuw", null, this.nieuw);
             n.ShortcutKeys = Keys.Control | Keys.N;
             menu.DropDownItems.Add(n);
             n = new ToolStripMenuItem("Open", null, this.Open);
             n.ShortcutKeys = Keys.Control | Keys.O;
             menu.DropDownItems.Add(n);
-            n = new ToolStripMenuItem("Importeren", null, this.Import);
+            n = new ToolStripMenuItem("Importeer afbeelding", null, this.Import);
             n.ShortcutKeys = Keys.Control | Keys.I;
             menu.DropDownItems.Add(n);
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);

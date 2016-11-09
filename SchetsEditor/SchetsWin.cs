@@ -110,9 +110,9 @@ namespace SchetsEditor
         private void Opslaan(object obj, EventArgs ea)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Title = "Save drawing";
+            sfd.Title = "Opslaan";
             sfd.Filter = "XML|*.xml";
-            sfd.FileName = "New drawing";
+            sfd.FileName = "Nieuwe tekening";
 
             if (sfd.ShowDialog() == DialogResult.OK)
             {
@@ -190,18 +190,12 @@ namespace SchetsEditor
         /// </summary>
         private void maakFileMenu()
         {
-            ToolStripMenuItem menu = new ToolStripMenuItem("File");
+            ToolStripMenuItem menu = new ToolStripMenuItem("Bestand");
             menu.MergeAction = MergeAction.MatchOnly;
-            ToolStripMenuItem tsm = new ToolStripMenuItem("Undo", null, this.Undo);
-            tsm.ShortcutKeys = Keys.Control | Keys.Z;
-            menu.DropDownItems.Add(tsm);
-            tsm = new ToolStripMenuItem("Redo", null, this.Redo);
-            tsm.ShortcutKeys = Keys.Control | Keys.Y;
-            menu.DropDownItems.Add(tsm);
-            tsm = new ToolStripMenuItem("Opslaan", null, this.Opslaan);
+            ToolStripMenuItem tsm = new ToolStripMenuItem("Opslaan", null, this.Opslaan);
             tsm.ShortcutKeys = Keys.Control | Keys.S;
             menu.DropDownItems.Add(tsm);
-            tsm = new ToolStripMenuItem("Exporteren", null, this.Export);
+            tsm = new ToolStripMenuItem("Opslaan als afbeelding", null, this.Export);
             tsm.ShortcutKeys = Keys.Control | Keys.E;
             menu.DropDownItems.Add(tsm);
             menu.DropDownItems.Add("Sluit tekening", null, this.afsluiten);
@@ -233,7 +227,13 @@ namespace SchetsEditor
         private void maakAktieMenu()
         {
             ToolStripMenuItem menu = new ToolStripMenuItem("Aktie");
-            menu.DropDownItems.Add("Clear", null, schetscontrol.Schoon);
+            ToolStripMenuItem tsm = new ToolStripMenuItem("Ongedaan", null, this.Undo);
+            tsm.ShortcutKeys = Keys.Control | Keys.Z;
+            menu.DropDownItems.Add(tsm);
+            tsm = new ToolStripMenuItem("Opnieuw", null, this.Redo);
+            tsm.ShortcutKeys = Keys.Control | Keys.Y;
+            menu.DropDownItems.Add(tsm);
+            menu.DropDownItems.Add("Alles wissen", null, schetscontrol.Schoon);
             menu.DropDownItems.Add("Roteer", null, schetscontrol.Roteer);
             menu.DropDownItems.Add("Kleur", null, schetscontrol.VeranderKleur);
             menu.DropDownItems.Add("Herteken", null, schetscontrol.RebuildBitmap);
@@ -275,13 +275,13 @@ namespace SchetsEditor
             this.Controls.Add(paneel);
 
             Button b = new Button();
-            b.Text = "Clear";
+            b.Text = "Alles wissen";
             b.Location = new Point(0, 0);
             b.Click += schetscontrol.Schoon;
             paneel.Controls.Add(b);
 
             b = new Button();
-            b.Text = "Rotate";
+            b.Text = "Roteer";
             b.Location = new Point(80, 0);
             b.Click += schetscontrol.Roteer;
             paneel.Controls.Add(b);
@@ -317,13 +317,13 @@ namespace SchetsEditor
             paneel.Controls.Add(b);
 
             b = new Button();
-            b.Text = "Undo";
+            b.Text = "Ongedaan maken";
             b.Location = new Point(460, 0);
             b.Click += this.Undo;
             paneel.Controls.Add(b);
 
             b = new Button();
-            b.Text = "Redo";
+            b.Text = "Opnieuw doen";
             b.Location = new Point(540, 0);
             b.Click += this.Redo;
             paneel.Controls.Add(b);
