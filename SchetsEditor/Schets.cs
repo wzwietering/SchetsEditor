@@ -45,7 +45,7 @@ namespace SchetsEditor
         }
 
         /// <summary>
-        /// Export shows a savefiledialog to save the image as an image file
+        /// Export laat een savefiledialog zien en exporteert de afbeelding als de gebruiker dat wil
         /// </summary>
         public void Export()
         {
