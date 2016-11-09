@@ -18,11 +18,12 @@ namespace SchetsEditor
             kwast = new SolidBrush(s.PenKleur);
         }
 
+        // If any elements were drawn, add them to the drawnItem and add the drawnItem to the Schets.DrawnItems.
         public virtual void Finalize(SchetsControl s)
         {
             if (this.drawnItem != null && this.drawnItem.elements != null && this.drawnItem.elements.Count > 0)
             {
-                s.Schets.AddElement(this.drawnItem);
+                s.Schets.drawnItems.Add(this.drawnItem);
             }
             drawnItem = new DrawnItem();
         }

@@ -15,7 +15,7 @@ namespace SchetsEditor
         public override void MuisLos(SchetsControl s, Point p)
         {
             // Get the object that was clicked
-            var clickedObjects = s.Schets.GetDrawnItems().Where(o => o.elements.Any(e => e.WasClicked(p)));
+            var clickedObjects = s.Schets.drawnItems.Where(o => o.elements.Any(e => e.WasClicked(p)));
             if (clickedObjects != null && clickedObjects.Count() > 0)
             {
                 selectedItem = clickedObjects.Last();

@@ -26,7 +26,7 @@ namespace SchetsEditor
                     : currentIndex == 0 ? 0 : currentIndex - 1;
 
                 // Remove and insert in new position.
-                s.Schets.RemoveElement(this.selectedItem);
+                s.Schets.drawnItems.Remove(this.selectedItem);
                 s.Schets.drawnItems.Insert(newIndex, this.selectedItem);
 
                 s.RebuildBitmap(this, new EventArgs());

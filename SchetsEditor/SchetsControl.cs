@@ -121,10 +121,8 @@ namespace SchetsEditor
             this.Schets.Schoon();
             this.Invalidate();
 
-            List<DrawnItem> items = schets.GetDrawnItems();
-
             var color = this.penkleur;
-            foreach (DrawnItem item in items)
+            foreach (DrawnItem item in schets.drawnItems)
             {
                 if (item != null)
                 {

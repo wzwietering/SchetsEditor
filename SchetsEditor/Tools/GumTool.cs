@@ -16,7 +16,7 @@ namespace SchetsEditor
             if (this.selectedItem != null)
             {
                 // remove it and rebuild the bitmap.
-                s.Schets.RemoveElement(selectedItem);
+                s.Schets.drawnItems.Remove(selectedItem);
                 s.RebuildBitmap(this, new EventArgs());
             }
         }
