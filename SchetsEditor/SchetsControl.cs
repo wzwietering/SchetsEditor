@@ -33,6 +33,7 @@ namespace SchetsEditor
             this.Paint += this.teken;
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
+            this.DoubleBuffered = true;
         }
         /// <summary>
         /// Eventhandler voor tekenen

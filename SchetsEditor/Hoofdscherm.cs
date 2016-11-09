@@ -15,7 +15,7 @@ namespace SchetsEditor
         /// </summary>
         public Hoofdscherm()
         {
-            this.ClientSize = new Size(800, 700);
+            this.ClientSize = new Size(800, 720);
             menuStrip = new MenuStrip();
             this.Controls.Add(menuStrip);
             this.maakFileMenu();

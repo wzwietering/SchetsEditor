@@ -20,7 +20,6 @@ namespace SchetsEditor
         public override void MuisVast(SchetsControl s, Point p)
         {
             base.MuisVast(s, p);
-            kwast = Brushes.Gray;
 
             element = Activator.CreateInstance<T>();
             element.pointA = p;

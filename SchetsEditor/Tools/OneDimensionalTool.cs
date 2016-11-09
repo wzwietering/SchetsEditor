@@ -12,10 +12,10 @@ namespace SchetsEditor
         public virtual void MuisVast(SchetsControl s, Point p)
         {
             drawnItem.color = s.PenKleur;
+            kwast = new SolidBrush(s.PenKleur);
         }
         public virtual void MuisLos(SchetsControl s, Point p)
         {
-            kwast = new SolidBrush(s.PenKleur);
         }
 
         // If any elements were drawn, add them to the drawnItem and add the drawnItem to the Schets.DrawnItems.
