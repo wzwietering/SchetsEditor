@@ -9,12 +9,16 @@ namespace SchetsEditor
     {
         public override string ToString() { return "gum"; }
 
+        // The item that was clicked
         internal DrawnItem selectedItem;
 
         public override void MuisLos(SchetsControl s, Point p)
         {
+            // Reset the selected item (because the user made a new click)
+            this.selectedItem = null;
+
             // Get the object that was clicked
-            var clickedObjects = s.Schets.GetDrawnItems().Where(o => o.elements.Any(e => e.WasClicked(p)));
+            var clickedObjects = s.Schets.drawnItems.Where(o => o.elements.Any(e => e.WasClicked(p)));
             if (clickedObjects != null && clickedObjects.Count() > 0)
             {
                 selectedItem = clickedObjects.Last();

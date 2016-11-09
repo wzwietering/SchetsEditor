@@ -79,25 +79,5 @@ namespace SchetsEditor
                 fs.Close();
             }
         }
-
-        internal void AddElement(DrawnItem objects)
-        {
-           this.drawnItems.Add(objects);
-        }
-
-        internal void ResetAllObjects()
-        {
-            this.drawnItems.Clear();
-        }
-
-        internal List<DrawnItem> GetDrawnItems()
-        {
-            return this.drawnItems;
-        }
-
-        internal void RemoveElement(DrawnItem clickedObject)
-        {
-            this.drawnItems.Remove(clickedObject);
-        }
     }
 }

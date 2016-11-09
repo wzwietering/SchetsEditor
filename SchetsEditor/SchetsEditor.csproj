@@ -109,6 +109,7 @@
   <ItemGroup>
     <Content Include="Resources\changes.txt" />
     <Content Include="Resources\ellips.png" />
+    <None Include="Resources\fill.png" />
     <Content Include="Resources\fillellips.png" />
     <Content Include="Resources\fillrect.png" />
     <Content Include="Resources\gum.png" />
