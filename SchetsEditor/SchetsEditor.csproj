@@ -88,6 +88,7 @@
     <Compile Include="SchetsWin.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Tools\BucketTool.cs" />
     <Compile Include="Tools\DragTool.cs" />
     <Compile Include="Tools\SelectorTool.cs" />
     <Compile Include="Tools\SortTool.cs" />
