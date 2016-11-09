@@ -19,7 +19,7 @@ namespace SchetsEditor
             = new ResourceManager("SchetsEditor.Properties.Resources"
                                  , Assembly.GetExecutingAssembly()
                                  );
-        bool unsavedChanges = true;
+        bool unsavedChanges = false;
 
         private void veranderAfmeting(object o, EventArgs ea)
         {
@@ -208,7 +208,7 @@ namespace SchetsEditor
         private void maakAktieButtons()
         {
             paneel = new Panel();
-            paneel.Size = new Size(600, 30);
+            paneel.Size = new Size(640, 30);
             this.Controls.Add(paneel);
 
             Button b = new Button();
@@ -251,6 +251,18 @@ namespace SchetsEditor
             b.Text = "Herteken";
             b.Location = new Point(380, 0);
             b.Click += schetscontrol.RebuildBitmap;
+            paneel.Controls.Add(b);
+
+            b = new Button();
+            b.Text = "Undo";
+            b.Location = new Point(460, 0);
+            b.Click += this.Undo;
+            paneel.Controls.Add(b);
+
+            b = new Button();
+            b.Text = "Redo";
+            b.Location = new Point(540, 0);
+            b.Click += this.Redo;
             paneel.Controls.Add(b);
         }
 
