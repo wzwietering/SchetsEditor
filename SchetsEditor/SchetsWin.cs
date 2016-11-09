@@ -128,9 +128,22 @@ namespace SchetsEditor
         /// </summary>
         public SchetsWin()
         {
-            ISchetsTool[] deTools = GetTools();
+            ISchetsTool[] deTools = { new TweepuntTool<Line>()
+                                    , new Pencil()
+                                    , new TweepuntTool<FullRectangle>()
+                                    , new TweepuntTool<LineRectangle>()
+                                    , new TweepuntTool<FullCircle>()
+                                    , new TweepuntTool<LineCircle>()
+                                    , new TekstTool()
+                                    , new GumTool()
+                                    , new SortTool() {directionUp = true }
+                                    , new SortTool() {directionUp = false }
+                                    };
 
-            this.ClientSize = new Size(700, 550);
+            this.ClientSize = new Size(700, 600);
+
+            this.WindowState = FormWindowState.Maximized;
+
             huidigeTool = deTools[0];
 
             schetscontrol = new SchetsControl();
