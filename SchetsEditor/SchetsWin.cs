@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.Reflection;
 using System.Resources;
 using SchetsEditor.IO;
+using SchetsEditor.Tools;
 
 namespace SchetsEditor
 {
@@ -138,6 +139,7 @@ namespace SchetsEditor
                                     , new GumTool()
                                     , new SortTool() {directionUp = true }
                                     , new SortTool() {directionUp = false }
+                                    , new BucketTool()
                                     };
 
             this.ClientSize = new Size(700, 600);

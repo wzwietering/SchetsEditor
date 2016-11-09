@@ -13,6 +13,7 @@ namespace SchetsEditor
         internal Stack<DrawnItem> undoStack = new Stack<DrawnItem>();
 
         public Bitmap bitmap;
+        public Brush background = Brushes.White;
 
         public Schets()
         {
@@ -26,7 +27,7 @@ namespace SchetsEditor
         {
             Bitmap nieuw = new Bitmap(sz.Width, sz.Height, PixelFormat.Format32bppArgb);
             Graphics gr = Graphics.FromImage(nieuw);
-            gr.FillRectangle(Brushes.White, 0, 0, sz.Width, sz.Height);
+            gr.FillRectangle(background, 0, 0, sz.Width, sz.Height);
             gr.DrawImage(bitmap, 0, 0);
             bitmap = nieuw;
         }
@@ -37,7 +38,7 @@ namespace SchetsEditor
         public void Schoon()
         {
             Graphics gr = BitmapGraphics;
-            gr.FillRectangle(Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
+            gr.FillRectangle(background, 0, 0, bitmap.Width, bitmap.Height);
         }
         public void Roteer()
         {
