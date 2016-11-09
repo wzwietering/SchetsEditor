@@ -51,8 +51,10 @@ Lijndikte:
 2. In de userinterface is er een slider en een label om dit aan te geven.
 
 Bitmap resize:
-1. Bitmap wordt opnieuw gemaakt als het window geresized wordt, zodat hij de afmetingen van het window heeft.
-
+1. Bitmap wordt opnieuw gemaakt als het window geresized wordt, zodat hij de afmetingen van het window heeft. Gekozen is om niet alle losse elementen mee te schalen.
+	Dan zou namelijk ineens je hele tekening vergroten of verkleinen, alleen maar omdat je bijvoorbeeld per ongeluk je window fullscreen maakt. Dit is niet 
+	gebruiksvriendelijk (denk bijvoorbeeld aan paint, daar werkt dat ook niet zo).
+	
 Undo/Redo: 
 		(er is gekozen voor een simpele undo/redo logic. Voor een betere implementatie zou het command pattern gebruikt kunnen worden maar daarvoor
 		moet het halve programma omgeschreven worden en gekozen is om onze tijd in plaats daarvan te besteden aan extra functionaliteit.)
