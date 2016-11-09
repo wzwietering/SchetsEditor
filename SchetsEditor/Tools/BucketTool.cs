@@ -15,10 +15,10 @@ namespace SchetsEditor.Tools
             if (this.selectedItem != null)
             {
                 DrawnItem temp = selectedItem;
-                s.Schets.RemoveElement(selectedItem);
+                s.Schets.drawnItems.Remove(selectedItem);
                 temp.color = s.penkleur;
                 temp.Draw(s);
-                s.Schets.AddElement(temp);
+                s.Schets.drawnItems.Add(temp);
                 s.RebuildBitmap(this, new EventArgs());
             }
             else
