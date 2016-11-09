@@ -24,7 +24,7 @@ namespace SchetsEditor
         }
         public void VeranderAfmeting(Size sz)
         {
-            Bitmap nieuw = new Bitmap(sz.Width, sz.Height);
+            Bitmap nieuw = new Bitmap(sz.Width, sz.Height, PixelFormat.Format32bppArgb);
             Graphics gr = Graphics.FromImage(nieuw);
             gr.FillRectangle(Brushes.White, 0, 0, sz.Width, sz.Height);
             gr.DrawImage(bitmap, 0, 0);
@@ -75,6 +75,7 @@ namespace SchetsEditor
                 }
                 System.IO.FileStream fs = (System.IO.FileStream)sfd.OpenFile();
                 bitmap.Save(fs, f);
+                fs.Close();
             }
         }
 

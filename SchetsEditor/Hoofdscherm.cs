@@ -10,6 +10,9 @@ namespace SchetsEditor
     {
         MenuStrip menuStrip;
 
+        /// <summary>
+        /// Maakt de form die de gebruiker ziet bij het opstarten
+        /// </summary>
         public Hoofdscherm()
         {
             this.ClientSize = new Size(800, 700);
@@ -21,6 +24,9 @@ namespace SchetsEditor
             this.IsMdiContainer = true;
             this.MainMenuStrip = menuStrip;
         }
+        /// <summary>
+        /// Voegt opties toe aan het menu
+        /// </summary>
         private void maakFileMenu()
         {
             ToolStripDropDownItem menu;
@@ -37,6 +43,9 @@ namespace SchetsEditor
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menuStrip.Items.Add(menu);
         }
+        /// <summary>
+        /// Maakt een menu informatie
+        /// </summary>
         private void maakHelpMenu()
         {
             ToolStripDropDownItem menu;
@@ -44,15 +53,23 @@ namespace SchetsEditor
             menu.DropDownItems.Add("Over \"Schets\"", null, this.about);
             menuStrip.Items.Add(menu);
         }
+        /// <summary>
+        /// Laat een dialoog zien met informatie over de auteurs
+        /// </summary>
         private void about(object o, EventArgs ea)
         {
-            MessageBox.Show("Schets versie 1.0\n(c) UU Informatica 2010"
+            MessageBox.Show("Schets versie 1.0\n(c) UU Informatica 2010\n\nUitgebreid en aangepast door M. Galama en W. Zwietering"
                            , "Over \"Schets\""
                            , MessageBoxButtons.OK
                            , MessageBoxIcon.Information
                            );
         }
 
+        /// <summary>
+        /// Maakt een nieuwe tekening in een apart venster
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nieuw(object sender, EventArgs e)
         {
             SchetsWin s = new SchetsWin();
@@ -60,13 +77,16 @@ namespace SchetsEditor
             s.Show();
         }
 
+        /// <summary>
+        /// Sluit het venster af
+        /// </summary>
         private void afsluiten(object sender, EventArgs e)
         {
             this.Close();
         }
 
         /// <summary>
-        /// Opens an XML file
+        /// Opent een XML file
         /// </summary>
         private void Open(object sender, EventArgs e)
         {
@@ -85,6 +105,9 @@ namespace SchetsEditor
             }
         }
 
+        /// <summary>
+        /// Opent een afbeelding
+        /// </summary>
         private void Import(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();

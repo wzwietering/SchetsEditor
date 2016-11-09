@@ -21,6 +21,9 @@ namespace SchetsEditor
                                  );
         bool unsavedChanges = false;
 
+        /// <summary>
+        /// Geeft een schetscontrol nieuwe afmetingen
+        /// </summary>
         private void veranderAfmeting(object o, EventArgs ea)
         {
             schetscontrol.Size = new Size(this.ClientSize.Width - 70
@@ -30,18 +33,27 @@ namespace SchetsEditor
             schetscontrol.RebuildBitmap(this, new EventArgs());
         }
 
+        /// <summary>
+        /// Voert de selectie van een nieuwe tool via het menu uit
+        /// </summary>
         private void klikToolMenu(object obj, EventArgs ea)
         {
             this.huidigeTool.Finalize(schetscontrol);
             this.huidigeTool = (ISchetsTool)((ToolStripMenuItem)obj).Tag;
         }
 
+        /// <summary>
+        /// Voert de selectie van een nieuwe tool via een knop uit
+        /// </summary>
         private void klikToolButton(object obj, EventArgs ea)
         {
             this.huidigeTool.Finalize(schetscontrol);
             this.huidigeTool = (ISchetsTool)((RadioButton)obj).Tag;
         }
 
+        /// <summary>
+        /// Voorkomt dat de form gesloten wordt als er wijzigingen zijn.
+        /// </summary>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             if (unsavedChanges)
@@ -54,28 +66,47 @@ namespace SchetsEditor
             base.OnFormClosing(e);
         }
 
+        /// <summary>
+        /// Sluit de form af
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="ea"></param>
         private void afsluiten(object obj, EventArgs ea)
         {
             OnFormClosing(new FormClosingEventArgs(CloseReason.UserClosing, false));
         }
 
+        /// <summary>
+        /// Exporteerd de afbeelding
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="ea"></param>
         private void Export(object obj, EventArgs ea)
         {
             schetscontrol.Schets.Export();
         }
 
+        /// <summary>
+        /// Eventhandler voor een undo via het menu of knop
+        /// </summary>
         private void Undo(object obj, EventArgs ea)
         {
             unsavedChanges = true;
             schetscontrol.Undo();
         }
 
+        /// <summary>
+        /// Eventhandler voor een redo via het menu of knop
+        /// </summary>
         private void Redo(object obj, EventArgs ea)
         {
             unsavedChanges = true;
             schetscontrol.Redo();
         }
 
+        /// <summary>
+        /// Laat een savefiledialog zien en slaat de afbeelding op.
+        /// </summary>
         private void Opslaan(object obj, EventArgs ea)
         {
             SaveFileDialog sfd = new SaveFileDialog();
@@ -92,6 +123,9 @@ namespace SchetsEditor
             }
         }
 
+        /// <summary>
+        /// Maakt een nieuw venster met een tekening
+        /// </summary>
         public SchetsWin()
         {
             ISchetsTool[] deTools = { new TwoDimensionalTool<Line>()
@@ -107,9 +141,7 @@ namespace SchetsEditor
                                     };
 
             this.ClientSize = new Size(700, 600);
-
             this.WindowState = FormWindowState.Maximized;
-
             huidigeTool = deTools[0];
 
             schetscontrol = new SchetsControl();
@@ -153,6 +185,9 @@ namespace SchetsEditor
             this.veranderAfmeting(null, null);
         }
 
+        /// <summary>
+        /// Toevoeging van vele mogelijkheden in het menu
+        /// </summary>
         private void maakFileMenu()
         {
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
@@ -173,6 +208,10 @@ namespace SchetsEditor
             menuStrip.Items.Add(menu);
         }
 
+        /// <summary>
+        /// Maakt een menu met alle tools er in
+        /// </summary>
+        /// <param name="tools"></param>
         private void maakToolMenu(ICollection<ISchetsTool> tools)
         {
             ToolStripMenuItem menu = new ToolStripMenuItem("Tool");
@@ -188,15 +227,23 @@ namespace SchetsEditor
             menuStrip.Items.Add(menu);
         }
 
+        /// <summary>
+        /// Maakt een menu met alle acties er in
+        /// </summary>
         private void maakAktieMenu()
         {
             ToolStripMenuItem menu = new ToolStripMenuItem("Aktie");
             menu.DropDownItems.Add("Clear", null, schetscontrol.Schoon);
             menu.DropDownItems.Add("Roteer", null, schetscontrol.Roteer);
-            menu.DropDownItems.Add("Kleur", null, schetscontrol.VeranderKleurViaMenu);
+            menu.DropDownItems.Add("Kleur", null, schetscontrol.VeranderKleur);
+            menu.DropDownItems.Add("Herteken", null, schetscontrol.RebuildBitmap);
             menuStrip.Items.Add(menu);
         }
 
+        /// <summary>
+        /// Maakt knoppen voor alle tools
+        /// </summary>
+        /// <param name="tools">De tools die een knop nodig hebben</param>
         private void maakToolButtons(ICollection<ISchetsTool> tools)
         {
             int t = 0;
@@ -218,6 +265,9 @@ namespace SchetsEditor
             }
         }
 
+        /// <summary>
+        /// Maakt de knoppen onder aan het venster
+        /// </summary>
         private void maakAktieButtons()
         {
             paneel = new Panel();
@@ -239,7 +289,7 @@ namespace SchetsEditor
             b = new Button();
             b.Text = "Kleur";
             b.Location = new Point(160, 0);
-            b.Click += schetscontrol.VeranderKleurViaMenu;
+            b.Click += schetscontrol.VeranderKleur;
             paneel.Controls.Add(b);
 
             Label l = new Label();

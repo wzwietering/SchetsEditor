@@ -10,10 +10,10 @@ namespace SchetsEditor.IO
     class Read
     {
         /// <summary>
-        /// Reads a saved XML and converts it to a drawing
+        /// Leest een XML en maakt er een tekening van
         /// </summary>
-        /// <param name="path">The location of the XML on the disk</param>
-        /// <param name="sw">The schetswin to draw on</param>
+        /// <param name="path">De opgeslagen locatie van de XML</param>
+        /// <param name="sw">Het window waar de tekening in komt</param>
         public void ReadXML(string path, SchetsWin sw)
         {
             XDocument xml = XDocument.Load(path);
@@ -53,6 +53,7 @@ namespace SchetsEditor.IO
                 current.MuisLos(sw.schetscontrol, XElementToPoint(o.Descendants("Elements").Last(), "PointB"));
             }
 
+            //Tekst wordt anders opgeslagen dan de andere tools, dus het wordt ook anders gelezen
             ISchetsTool text;
             foreach (XElement to in xml.Descendants("TextObject"))
             {
@@ -69,6 +70,7 @@ namespace SchetsEditor.IO
                 text.Finalize(sw.schetscontrol);
             }
 
+            //Geïmporteerde afbeeldingen worden ook anders opgeslagen dan andere tools
             ImageTool imagetool;
             foreach(XElement i in xml.Descendants("Image"))
             {
@@ -80,14 +82,14 @@ namespace SchetsEditor.IO
         }
 
         /// <summary>
-        /// This method gets the saved coordinates from an XElement and makes a point from them
+        /// Converteert een XElement naar een punt
         /// </summary>
-        /// <param name="xe">The XElement to read</param>
-        /// <param name="variable">The name of the variable to make a point from</param>
-        /// <returns>A new point made from the coordinates in the XElement</returns>
-        public Point XElementToPoint(XElement xe, string variable)
+        /// <param name="xe">Het XElement</param>
+        /// <param name="filter">Het filter wat toegepast wordt om het punt te vinden</param>
+        /// <returns>Een nieuw punt die ooit een XElement was</returns>
+        public Point XElementToPoint(XElement xe, string filter)
         {
-            string[] xy = xe.Element(variable).Value.Split(',', '=', '}');
+            string[] xy = xe.Element(filter).Value.Split(',', '=', '}');
             Point p = new Point(int.Parse(xy[1]), int.Parse(xy[3]));
             return p;
         }
