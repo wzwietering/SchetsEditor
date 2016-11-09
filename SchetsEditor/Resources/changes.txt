@@ -23,17 +23,18 @@ Het nieuwe gummen:
 
 Bestanden:
 1. Schets heeft een 'Export' methode gekregen om een file op te slaan als afbeelding.
-2. Hoofdscherm heeft een 'Export' knop gekregen in het menu.
+2. Hoofdscherm heeft een 'Exporteren' knop gekregen in het menu.
 3. Er is een 'Read' klasse die XML files kan lezen toegevoegd.
 4. De 'Write' klasse schrijft de objecten en hun variabelen naar een XML.
+5. Via 'Importeren' in het hoofdscherm kan een afbeelding geladen worden met de 'Import' methode.
+6. De ImageTool en de Image klasse zijn verantwoordelijk voor het tekenen van een afbeelding.
 
 Colorpicker:
 1. Lijst met kleuren bestaat niet meer, alle plaatsen waar deze gebruikt werd zijn hiervoor aangepast.
 2. De kleuren kunnen nu via een ColorDialog ingesteld worden die met een knop of via het menu geopend wordt.
-3. Variable lijndikte
 
 Lijndikte:
-1.	Lijn hebben een instelbare dikte
+1. Lijnen hebben een instelbare dikte
 2. In de userinterface is er een slider en een label om dit aan te geven.
 
 Bitmap resize:
@@ -41,3 +42,4 @@ Bitmap resize:
 
 Overig:
 1. Een nieuwe afbeelding kan nu met een keyboard shortcut geopend worden.
+2. De 'VeranderKleur' en de 'VeranderKleurViaMenu' methodes zijn samengevoegd tot één methode genaamd 'VeranderKleur'.

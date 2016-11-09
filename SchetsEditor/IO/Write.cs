@@ -10,15 +10,16 @@ namespace SchetsEditor.IO
     class Write
     {
         /// <summary>
-        /// Creates a XML with all the information about the drawing
+        /// Maakt een XML met alle informatie over de tekening
         /// </summary>
-        /// <param name="path">The place to save the XML</param>
-        /// <param name="items">The items to save</param>
+        /// <param name="path">De plek om de XML op te slaan</param>
+        /// <param name="items">De elementen die opgeslagen moeten worden</param>
         public void WriteXML(string path, List<DrawnItem> items)
         {
             XElement xml = new XElement("Items");
             foreach (DrawnItem obj in items)
             {
+                //Tekst wordt anders opgeslagen dan andere objecten om ruimte te besparen
                 if (obj.elements[0] is Objects.Text)
                 {
                     xml.Add(new XElement("TextObject",
@@ -29,6 +30,7 @@ namespace SchetsEditor.IO
                                                        select new XElement("Text", ((Objects.Text)el).text)
                                                             ));
                 }
+                //Geïmporteerde afbeeldingen worden als verwijzing opgeslagen
                 else if (obj.elements[0] is DrawingObjects.Image)
                 {
                     xml.Add(new XElement("Image",

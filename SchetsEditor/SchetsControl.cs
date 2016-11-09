@@ -23,6 +23,9 @@ namespace SchetsEditor
 
         public int lijnDikte = 3;
 
+        /// <summary>
+        /// Maakt een schetscontrol. Een schetscontrol voert alle acties die met de tekening te maken hebben uit.
+        /// </summary>
         public SchetsControl()
         {
             this.BorderStyle = BorderStyle.Fixed3D;
@@ -31,41 +34,52 @@ namespace SchetsEditor
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
         }
-        protected override void OnPaintBackground(PaintEventArgs e)
-        {
-        }
+        /// <summary>
+        /// Eventhandler voor tekenen
+        /// </summary>
         private void teken(object o, PaintEventArgs pea)
         {
             schets.Teken(pea.Graphics);
         }
+        /// <summary>
+        /// Eventhandler die de afmetingen van een afbeelding aanpast
+        /// </summary>
         private void veranderAfmeting(object o, EventArgs ea)
         {
             schets.VeranderAfmeting(this.ClientSize);
             this.Invalidate();
         }
+        /// <summary>
+        /// Maakt de graphics van een bitmap
+        /// </summary>
+        /// <returns>Het graphics object</returns>
         public Graphics MaakBitmapGraphics()
         {
             Graphics g = schets.BitmapGraphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             return g;
         }
+        /// <summary>
+        /// Maakt de afbeelding leeg
+        /// </summary>
         public void Schoon(object o, EventArgs ea)
         {
             schets.Schoon();
             this.Invalidate();
         }
+        /// <summary>
+        /// Draait de afbeelding
+        /// </summary>
         public void Roteer(object o, EventArgs ea)
         {
             schets.VeranderAfmeting(new Size(this.ClientSize.Height, this.ClientSize.Width));
             schets.Roteer();
             this.Invalidate();
         }
-        public void VeranderKleur(object obj, EventArgs ea)
-        {
-            string kleurNaam = ((ComboBox)obj).Text;
-            penkleur = Color.FromName(kleurNaam);
-        }
 
+        /// <summary>
+        /// Voert een ongedane actie opnieuw uit
+        /// </summary>
         internal void Redo()
         {
             if (schets.undoStack.Count > 0)
@@ -76,6 +90,9 @@ namespace SchetsEditor
             }
         }
 
+        /// <summary>
+        /// Maakt een actie ongedaan
+        /// </summary>
         internal void Undo()
         {
             if (schets.drawnItems.Count > 0)
@@ -91,7 +108,7 @@ namespace SchetsEditor
             }
         }
 
-        public void VeranderKleurViaMenu(object obj, EventArgs ea)
+        public void VeranderKleur(object obj, EventArgs ea)
         {
             ColorDialog kleurDialoog = new ColorDialog();
             DialogResult resultaat = kleurDialoog.ShowDialog();
@@ -101,6 +118,9 @@ namespace SchetsEditor
             }
         }
 
+        /// <summary>
+        /// Deze methode verwijdert alles op de bitmap en tekent hem dan opnieuw
+        /// </summary>
         public void RebuildBitmap(object sender, EventArgs e)
         {
             this.Schets.Schoon();
