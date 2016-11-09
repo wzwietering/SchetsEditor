@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Drawing;
-using System.Linq;
 
 namespace SchetsEditor
 {
     // Tool to move drawn items up and down in the list of drawn items, to move them on top of or underneath other items.
-    public class SortTool : OneDimensionalTool
+    public class SortTool : SelectorTool
     {
         // Determines whether this tool moves drawn items up (if true) or down (if false)
         public bool directionUp;
@@ -14,11 +13,11 @@ namespace SchetsEditor
 
         public override void MuisLos(SchetsControl s, Point p)
         {
-            var clickedObjects = s.Schets.GetDrawnItems().Where(o => o.elements.Any(e => e.WasClicked(p)));
-            if (clickedObjects != null && clickedObjects.Count() > 0)
+            base.MuisLos(s, p);
+
+            if (this.selectedItem != null)
             {
-                var clickedObject = clickedObjects.Last();
-                int currentIndex = s.Schets.drawnItems.IndexOf(clickedObject);
+                int currentIndex = s.Schets.drawnItems.IndexOf(this.selectedItem);
 
                 int newIndex = directionUp 
                     // Only move up if it is not already the element with the highest index
@@ -27,8 +26,8 @@ namespace SchetsEditor
                     : currentIndex == 0 ? 0 : currentIndex - 1;
 
                 // Remove and insert in new position.
-                s.Schets.RemoveElement(clickedObject);
-                s.Schets.drawnItems.Insert(newIndex, clickedObject);
+                s.Schets.RemoveElement(this.selectedItem);
+                s.Schets.drawnItems.Insert(newIndex, this.selectedItem);
 
                 s.RebuildBitmap(this, new EventArgs());
             }

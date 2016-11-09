@@ -9,14 +9,14 @@ Het nieuwe gummen:
 	-	Door van elk type 'tekening' een andere klasse te maken, kunnen deze klassen meteen gebruikt worden om voor elk type een andere implementatie van WasClicked() te
 		maken. Elk type heeft immers een andere berekening nodig om te kijken of er op geklikt is.
 
-2.  De tweepunt tool heeft nu een Type parameter, welke een DrawnElement moet zijn. De tweepunttool tekent dus zelf niks meer. Hij maakt elementen, die 
-    zichzelf tekenen. Dit is gedaan vanwege de volgende redenen:
+2.  De tweepunt tool heet nu TwoDimensionalTool en heeft nu een Type parameter, welke een DrawnElement moet zijn. De tweepunttool tekent dus zelf niks meer. 
+	Hij maakt elementen, die zichzelf tekenen. Dit is gedaan vanwege de volgende redenen:
 	-   er moest sowieso een lijst met elementen bijgehouden worden (t.b.v. het nieuwe gummen), dus we gebruik konden maken van die bestaande elementen om ook zichzelf
         te laten tekenen. Zo doet een tool één ding: het maakt een element. Anders zouden de tools naast het tekenen ook ineens een datastructuur van elementen moeten
 	    gaan onderhouden. 
 	-   De tools waren ingewikkeld geïmplementeerd. Het was een enorm overervingsfeestje wat niet voor duidelijkheid zorgde (alle methodes leken overal van alles aan te roepen)
 	    Met de nieuwe implementatie is er een tool die de events afvangt, en het tekenen gebeurt ergens anders. Seperation of concerns.
-3.	De tweepunt tool maakt een drawnItem, die weer een lijst van DrawnElements bevat. Bij cirkels, vierkanten en een lijn zal deze lijst altijd een element bevatten. 
+3.	De TwoDimensionalTool maakt een drawnItem, die weer een lijst van DrawnElements bevat. Bij cirkels, vierkanten en een lijn zal deze lijst altijd een element bevatten. 
 	Echter bij tekst en de pen, worden vele elementen toegevoegd (bijvoorbeeld bij tekst voor elke letter een element). Door deze te groeperen in DrawnItems kunnen
 	tekstblokken in een keer gewist worden.
 4.	Reset() method is toegevoegd aan de tool. Dit is ten behoeve van het groeperen van tekst elementen in een drawnItem. 
