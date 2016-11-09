@@ -6,7 +6,7 @@ namespace SchetsEditor.Tools
     public class BucketTool : SelectorTool
     {
         //Deze tool maakt een object een andere kleur
-        public override string ToString() { return "emmer"; }
+        public override string ToString() { return "vul"; }
 
         public override void MuisLos(SchetsControl s, Point p)
         {
