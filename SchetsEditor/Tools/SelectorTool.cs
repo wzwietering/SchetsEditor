@@ -9,6 +9,7 @@ namespace SchetsEditor
     {
         public override string ToString() { return "gum"; }
 
+        // The item that was clicked
         internal DrawnItem selectedItem;
 
         public override void MuisLos(SchetsControl s, Point p)
